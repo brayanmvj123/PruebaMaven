@@ -1,0 +1,59 @@
+name: Build With Maven
+run-name: Build With Maven
+on:
+  push:
+    branches: [ feature/brayan ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Configure Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        maven: cache
+
+    - name: Build
+      run: |
+        if [[ $(find . -name "*.war" | wc -l) -eq 1 ]]; then
+            mvn clean package -DskipTests=true -X
+          else
+            CHANGED_FOLDERS=""
+            for war in $(find . -name "*.war"); do
+              folder="${war%.*}"
+              if [[ -n $(git diff --name-only HEAD^ HEAD $folder) ]]; then
+                CHANGED_FOLDERS+="$folder "
+              fi
+            done
+            mvn -pl $CHANGED_FOLDERS clean package -DskipTests=true -X
+          fi
+
+    - name: Upload WARs
+      uses: actions/upload-artifact@v2
+      with:
+        name: WARs
+        path: target/
+
+  Download_Artifact: 
+    runs-on: windows
+    needs: [build]
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: WARs
+          path: st/target
+
+  #Deploy:
+           # uses: bdb-dns/bbog-ap-weblogic-lib/.github/workflows/DespliegueWL.yml@master
+            #needs: [Download_Artifact]
+            #with:
+            # ambiente: 'st'
+             #consola: ${{vars.URL_WL_ST}}
+            #secrets: inherit      

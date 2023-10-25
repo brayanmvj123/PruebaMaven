@@ -1,0 +1,166 @@
+@import "theming";
+
+.uk-select,
+.uk-textarea,
+.uk-input {
+  border-radius: 4px;
+  background-color: $light-gray-1;
+  padding-left: 1rem;
+  color: $text-color-dark-2;
+  border: 1px solid transparent;
+
+  &:disabled.date {
+    background-color: $light-gray-1;
+    color: $text-color-dark-2;
+    border: 1px solid transparent;
+  }
+
+  &:focus {
+    background-color: $light-gray-2;
+    color: $text-color-dark-2;
+  }
+
+  &::placeholder {
+    color: $text-color-dark-2;
+  }
+
+  // Validators ------------------------------------------------------------------------------------------------------//
+  &.ng-touched {
+    &.ng-invalid {
+      border-color: $danger-color;
+      background-color: rgba($danger-color, .01);
+
+      + .cmessage,
+      + .message {
+        opacity: 1;
+        margin-left: 0;
+        height: auto;
+      }
+    }
+
+    &.ng-valid {
+      // border-color: $success-color;
+      // background-color: rgba($success-color, .05);
+    }
+  }
+}
+
+.uk-radio {
+  &:disabled {
+    &:checked {
+      background-color: rgba(#1e87f0, 1);
+      background-image: $image-checked;
+      border-color: transparent;
+    }
+  }
+
+  &.ng-invalid {
+    &.ng-touched {
+      border-color: $danger-color;
+
+      + .text {
+        color: $danger-color;
+      }
+    }
+  }
+}
+
+form {
+  position: relative;
+  box-sizing: content-box;
+
+  .group {
+    margin: 1rem 0;
+    position: relative;
+
+    > label {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 10px;
+
+      &.ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    input::placeholder {
+      color: $placeholder-color;
+    }
+  }
+
+  .submit-group {
+    text-align: right;
+    margin-top: 1.5rem;
+
+    button {
+      margin-left: .5rem;
+    }
+  }
+
+  .merged {
+    position: relative;
+
+    > .right {
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      background: rgba(#000, .1);
+      border: none;
+      outline: none;
+      cursor: pointer;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 14px;
+
+      &:hover {
+        background: rgba(#000, .2);
+      }
+    }
+
+    > .loading {
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      border: none;
+      outline: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+    }
+  }
+
+  .uk-select,
+  .uk-input {
+    &:disabled {
+      color: rgba($placeholder-color, 1);
+      background: rgba($text-color-dark-1, .015);
+      border: 1px dashed rgba($text-color-dark-1, .1);
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: rgba($placeholder-color, 1);
+      }
+
+      &.ng-pending {
+        border-color: $danger-color;
+      }
+    }
+  }
+
+  .uk-select {
+    &:disabled {
+      color: rgba($placeholder-color, 1);
+    }
+  }
+}
+
+.uk-select:not([multiple]):not([size]) option {
+  color: rgba($placeholder-color, 1);
+}
+
+select[disabled] > option {
+  color: rgba($placeholder-color, 1);
+}

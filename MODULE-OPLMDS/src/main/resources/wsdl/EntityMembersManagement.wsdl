@@ -1,0 +1,1939 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="EntityMembersManagement" targetNamespace="urn://bancodebogota.com/rdm/classification/service/" xmlns:Q1="urn://bancodebogota.com/ifx/base/v1/" xmlns:rdm="urn://bancodebogota.com/rdm/classification/event/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="urn://bancodebogota.com/rdm/classification/service/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn://bancodebogota.com/rdm/classification/service/">
+		<!-- ******  -->
+		<xsd:import namespace="urn://bancodebogota.com/ifx/base/v1/"/>
+		<xsd:import namespace="urn://bancodebogota.com/rdm/classification/event/"/>			
+			
+		<!-- ******  -->	
+		<xsd:element name="getEntityMembersRequest">
+			<xsd:complexType>
+				<xsd:sequence>
+					<xsd:element ref="rdm:EntityMembersInqRq"/>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="getEntityMembersResponse">
+			<xsd:complexType>
+				<xsd:sequence>
+					<xsd:element ref="rdm:EntityMembersInqRs"/>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:element>		
+		</xsd:schema>
+        <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn://bancodebogota.com/ifx/base/v1/" xmlns="urn://bancodebogota.com/ifx/base/v1/" xmlns:bbog="urn://bancodebogota.com/ifx/base/v1/" xmlns:pref="urn://bancodebogota.com/ifx/base/v1/">
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza el tipo de versión.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="Version" type="Version_Type"/>
+      <xsd:simpleType name="Version_Type">
+		<xsd:restriction base="NC">
+			<xsd:maxLength value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:simpleType name="NC">
+		<xsd:annotation>
+			<xsd:documentation>
+				Elementos de tipo Narrow Character son elementos de tipo de dato caracter con la restrición adicional
+				que los únicos caracteres permitidos son los contenidos dentro del conjunto de caracteres ISO Latin-1.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza la descripción del estado.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:simpleType name="StatusDesc_Type">
+		<xsd:restriction base="bbog:C">
+			<xsd:maxLength value="2048"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="StatusDesc" type="bbog:StatusDesc_Type"/>
+      <xsd:element name="ServerStatusDesc" type="bbog:StatusDesc_Type"/>
+      <xsd:simpleType name="C">
+		<xsd:annotation>
+			<xsd:documentation>
+				Este es el tipo básico de texto, éste extiende directamente del tipo básico string provisto por XSD.
+				Se puede especificar el tamaño de este campo con un sufijo numérico. Por ejemplo C-3 es un string de 3 caracteres. 
+				A pesar de que las entidades se encuentran con C-x en la especificación, dentro del XSD hay tipos de datos básicos 
+				específicos para cada entidad que extienden directamente de C.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+      <xsd:element name="LockboxAcctId" type="Identifier_Type"/>
+      <xsd:element name="FontId" type="Identifier_Type"/>
+      <xsd:element name="PayorAcctId" type="Identifier_Type"/>
+      <xsd:element name="Org" type="Identifier_Type"/>
+      <xsd:element name="DebitId" type="Identifier_Type"/>
+      <xsd:element name="CreditAuthId" type="Identifier_Type"/>
+      <xsd:element name="TrnAuthId" type="Identifier_Type"/>
+      <xsd:element name="ClientTerminalSeqId" type="Identifier_Type"/>
+      <xsd:element name="SPRefId" type="Identifier_Type"/>
+      <xsd:element name="SecretId" type="Identifier_Type"/>
+      <xsd:element name="RefId" type="Identifier_Type"/>
+      <xsd:element name="DeathCertificateId" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador acta defuncion 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="PostingSessionId" type="Identifier_Type"/>
+      <xsd:element name="Identifier" type="Identifier_Type"/>
+      <xsd:element name="BillSummAmtId" type="Identifier_Type"/>
+      <xsd:element name="AccountantCenter" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador Centro Contable.
+			</xsd:documentation>
+		</xsd:annotation>	
+	</xsd:element>
+      <xsd:element name="AcctPayAcct" type="Identifier_Type"/>
+      <xsd:element name="InvItemId" type="Identifier_Type"/>
+      <xsd:element name="EMVCardId" type="Identifier_Type"/>
+      <xsd:element name="PassbkLastItemPrinted" type="Identifier_Type"/>
+      <xsd:element name="FileId" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del archivo.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="NewToken" type="Identifier_Type"/>
+      <xsd:element name="DebitAuthId" type="Identifier_Type"/>
+      <xsd:element name="CreateRefId" type="Identifier_Type"/>
+      <xsd:element name="Token" type="Identifier_Type"/>
+      <xsd:element name="ChksumId" type="Identifier_Type"/>
+      <xsd:element name="SPName" type="Identifier_Type"/>
+      <xsd:element name="SecObjId" type="Identifier_Type"/>
+      <xsd:element name="RecXferId" type="Identifier_Type"/>
+      <xsd:element name="PriorizationCode" type="Identifier_Type"/>
+      <xsd:element name="PmtRemitRefId" type="Identifier_Type"/>
+      <xsd:element name="ParticipantId" type="bbog:Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del número de Identificación.
+			</xsd:documentation>
+		</xsd:annotation>	
+	</xsd:element>
+      <xsd:element name="BillerNum" type="Identifier_Type"/>
+      <xsd:element name="SubSegmentId" type="Identifier_Type"/>
+      <xsd:element name="PhoneId" type="bbog:Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del teléfono
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="IdentProgramId" type="Identifier_Type"/>
+      <xsd:element name="DevId" type="Identifier_Type"/>
+      <xsd:element name="PassbkItemId" type="Identifier_Type"/>
+      <xsd:element name="NetworkRefId" type="Identifier_Type"/>
+      <xsd:element name="CustPayeeId" type="Identifier_Type"/>
+      <xsd:element name="BiometricCode" type="Identifier_Type"/>
+      <xsd:element name="CoverStyleId" type="Identifier_Type"/>
+      <xsd:element name="TerminalSPObjId" type="Identifier_Type"/>
+      <xsd:element name="EmailId" type="bbog:Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del Email
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="ChkOrdId" type="Identifier_Type"/>
+      <xsd:element name="SessionLoginId" type="Identifier_Type"/>
+      <xsd:element name="SecEncryptId" type="Identifier_Type"/>
+      <xsd:element name="RecPmtId" type="Identifier_Type"/>
+      <xsd:element name="OTP" type="Identifier_Type"/>
+      <xsd:element name="PmtRefId" type="Identifier_Type"/>
+      <xsd:element name="BankSvcChkSumId" type="Identifier_Type"/>
+      <xsd:element name="ContactId" type="bbog:Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del Contacto
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="SegmentId" type="Identifier_Type"/>
+      <xsd:simpleType name="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificadores de objeto que extienden de Narrow Character de IFX con una longitud máxima de 36 caracteres.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="bbog:NC">
+			<xsd:maxLength value="36"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="HoldCoId" type="Identifier_Type"/>
+      <xsd:element name="DepBkStyleId" type="Identifier_Type"/>
+      <xsd:element name="PassbkId" type="Identifier_Type"/>
+      <xsd:element name="MediaContainerId" type="Identifier_Type"/>
+      <xsd:element name="CSPRefId" type="Identifier_Type"/>
+      <xsd:element name="VBV" type="Identifier_Type"/>
+      <xsd:element name="CompRemitStmtId" type="Identifier_Type"/>
+      <xsd:element name="Serial" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador serial legado OTPMANAGER.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TerminalObjId" type="Identifier_Type"/>
+      <xsd:element name="ChkBkStyleId" type="Identifier_Type"/>
+      <xsd:element name="SessionId" type="Identifier_Type"/>
+      <xsd:element name="RemitRefId" type="Identifier_Type"/>
+      <xsd:element name="RecChkOrdId" type="Identifier_Type"/>
+      <xsd:element name="NodeIdTo" type="Identifier_Type"/>
+      <xsd:element name="PmtId" type="Identifier_Type"/>
+      <xsd:element name="ChkAcceptId" type="Identifier_Type"/>
+      <xsd:element name="ApprovalId" type="Identifier_Type"/>
+      <xsd:element name="CIIU" type="Identifier_Type"/>
+      <xsd:element name="ForExRateId" type="Identifier_Type"/>
+      <xsd:element name="DepBkOrdId" type="Identifier_Type"/>
+      <xsd:element name="PartyAcctRelId" type="Identifier_Type"/>
+      <xsd:element name="MediaAcctId" type="Identifier_Type"/>
+      <xsd:element name="CreditMediaItemId" type="Identifier_Type"/>
+      <xsd:element name="XferId" type="Identifier_Type"/>
+      <xsd:element name="CompositeCurAmtId" type="Identifier_Type"/>
+      <xsd:element name="RevClientTrnSeq" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador secuencial transacción de los reversos del Cliente.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TerminalId" type="Identifier_Type"/>
+      <xsd:element name="ServerTerminalSeqId" type="Identifier_Type"/>
+      <xsd:element name="RemitId" type="Identifier_Type"/>
+      <xsd:element name="PurchItemId" type="Identifier_Type"/>
+      <xsd:element name="NodeIdFrom" type="Identifier_Type"/>
+      <xsd:element name="PmtEnclId" type="Identifier_Type"/>
+      <xsd:element name="CardPrefId" type="Identifier_Type"/>
+      <xsd:element name="ProductNum" type="bbog:Identifier_Type">	
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del número de Producto.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="AgentId" type="Identifier_Type"/>
+      <xsd:element name="ClientTrnSeq" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador secuencial transaccion del Cliente.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="MediaAcctAdjId" type="Identifier_Type"/>
+      <xsd:element name="ProductCode" type="bbog:Identifier_Type">	
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del número de Producto.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="ForExDealId" type="Identifier_Type"/>
+      <xsd:element name="DepAppId" type="Identifier_Type"/>
+      <xsd:element name="PmtAuthId" type="Identifier_Type"/>
+      <xsd:element name="OrgIdNum" type="Identifier_Type"/>
+      <xsd:element name="DepAcctStmtId" type="Identifier_Type"/>
+      <xsd:element name="CreditId" type="Identifier_Type"/>
+      <xsd:element name="VoucherTypeId" type="Identifier_Type"/>
+      <xsd:element name="ClubAcctId" type="Identifier_Type"/>
+      <xsd:element name="StopChkId" type="Identifier_Type"/>
+      <xsd:element name="SecSignId" type="Identifier_Type"/>
+      <xsd:element name="RelatedCreditId" type="Identifier_Type"/>
+      <xsd:element name="ProductId" type="bbog:Identifier_Type">	
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador del número de Producto.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="PurchId" type="Identifier_Type"/>
+      <xsd:element name="NodeId" type="Identifier_Type"/>
+      <xsd:element name="PmtBatchId" type="Identifier_Type"/>
+      <xsd:element name="CardId" type="Identifier_Type"/>
+      <xsd:element name="BatchId" type="Identifier_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador Batch.
+			</xsd:documentation>
+		</xsd:annotation>	
+	</xsd:element>
+      <xsd:element name="AcctPayAcctId" type="Identifier_Type"/>
+      <xsd:element name="PrePaidBalType" type="OpenEnum_Type"/>
+      <xsd:element name="Environment" type="OpenEnum_Type"/>
+      <xsd:element name="PmtAuthStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuScannerGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="ChksumStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuFasciaLight" type="OpenEnum_Type"/>
+      <xsd:element name="MsgType" type="OpenEnum_Type"/>
+      <xsd:element name="CardPrefStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuAmbientLight" type="OpenEnum_Type"/>
+      <xsd:element name="IdentVerifyEntity" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimTransportItems" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimBinType" type="OpenEnum_Type"/>
+      <xsd:element name="AcctType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCamStatusArea" type="OpenEnum_Type"/>
+      <xsd:element name="ContentType" type="OpenEnum_Type"/>
+      <xsd:element name="ECARDInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador de tarjeta electrónica.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DebitType" type="OpenEnum_Type"/>
+      <xsd:element name="RateInfoType" type="OpenEnum_Type"/>
+      <xsd:element name="StatusModBy" type="OpenEnum_Type"/>
+      <xsd:element name="ProrityPassInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador prioritario.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="PurchItemStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="Gender" type="OpenEnum_Type"/>
+      <xsd:element name="POSLocation" type="OpenEnum_Type"/>
+      <xsd:element name="OEDInstitution" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuOpenClose" type="OpenEnum_Type"/>
+      <xsd:element name="CashValidity" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuChkGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MeasureUnit" type="OpenEnum_Type"/>
+      <xsd:element name="BranchIdType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de oficina.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BankSvcChkSumType" type="OpenEnum_Type"/>
+      <xsd:element name="DevIdcOperation" type="OpenEnum_Type"/>
+      <xsd:element name="AcctStatus" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimOperation" type="OpenEnum_Type"/>
+      <xsd:element name="Aging" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmOperation" type="OpenEnum_Type"/>
+      <xsd:element name="Franchise" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Franquicia.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BlackListType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Enumerador de tipos de listas de prevencion.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DepApplicantAcctRel" type="OpenEnum_Type"/>
+      <xsd:element name="CustAcctUse" type="OpenEnum_Type"/>
+      <xsd:element name="SignonType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de Signon
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="Technology" type="OpenEnum_Type"/>
+      <xsd:element name="RevReasonCode" type="OpenEnum_Type"/>
+      <xsd:element name="IdentReadMethod" type="OpenEnum_Type"/>
+      <xsd:element name="POSVerifyCapability" type="OpenEnum_Type"/>
+      <xsd:simpleType name="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Extiende del tipo básico C de IFX, los valores válidos que puede tomar están especificados en el estándar, 
+				sin embargo un valor por fuera del listado no necesariamente es declarado no válido.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="C">
+			<xsd:maxLength value="80"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="DevVdmOperation" type="OpenEnum_Type"/>
+      <xsd:element name="PersonVerifyType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuReceiptGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="ChkAcceptType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuDocumentGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MicrReadIntegrity" type="OpenEnum_Type"/>
+      <xsd:element name="BiometricsStatus" type="OpenEnum_Type"/>
+      <xsd:element name="DevPtrSupplyLocation" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimStackerItems" type="OpenEnum_Type"/>
+      <xsd:element name="DevChkOperation" type="OpenEnum_Type"/>
+      <xsd:element name="AcctTaxStatus" type="OpenEnum_Type"/>
+      <xsd:element name="DevAppOperation" type="OpenEnum_Type"/>
+      <xsd:element name="CosignerInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador de la consignación.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="ContactPref" type="OpenEnum_Type"/>
+      <xsd:element name="DebitAuthType" type="OpenEnum_Type"/>
+      <xsd:element name="ViewDtlPref" type="OpenEnum_Type"/>
+      <xsd:element name="SignonRole" type="OpenEnum_Type"/>
+      <xsd:element name="NationalityType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de nacionalidad.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="PSSMsgMAC" type="OpenEnum_Type"/>
+      <xsd:element name="ForeignUse" type="OpenEnum_Type"/>
+      <xsd:element name="PmtMethod" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuUps" type="OpenEnum_Type"/>
+      <xsd:element name="NumberType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuIdcGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="CardType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuCabinet" type="OpenEnum_Type"/>
+      <xsd:element name="InvoiceType" type="OpenEnum_Type"/>
+      <xsd:element name="BankPreventiveLock" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Bloqueo preventivo Bancario.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BankIdType" type="OpenEnum_Type"/>
+      <xsd:element name="DevDepType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimIntermediateStacker" type="OpenEnum_Type"/>
+      <xsd:element name="AdjType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmCashUnits" type="OpenEnum_Type"/>
+      <xsd:element name="EmailType" type="OpenEnum_Type"/>
+      <xsd:element name="VerifiedByVisa" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Verificado por visa.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DeliveryMedia" type="OpenEnum_Type"/>
+      <xsd:element name="CreditType" type="OpenEnum_Type"/>
+      <xsd:element name="RelType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de relación
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="SvcName" type="OpenEnum_Type"/>
+      <xsd:element name="RestartType" type="OpenEnum_Type"/>
+      <xsd:element name="IdentConditions" type="OpenEnum_Type"/>
+      <xsd:element name="PostingSessionStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevTtuOperation" type="OpenEnum_Type"/>
+      <xsd:element name="OverrideType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuPassbookGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="CharType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuCoinOutGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MediaTrnType" type="OpenEnum_Type"/>
+      <xsd:element name="CompanyNameInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador del nombre de la compañía
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BillSummAmtCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevPINType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimSafeDoor" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmShutter" type="OpenEnum_Type"/>
+      <xsd:element name="MassiveProcess" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Proceso Masivo.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DevCdmTransportItems" type="OpenEnum_Type"/>
+      <xsd:element name="EanCode" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Identificador de Codigo de Barras 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DevAlmOperation" type="OpenEnum_Type"/>
+      <xsd:element name="CompositeCurAmtType" type="OpenEnum_Type"/>
+      <xsd:element name="CustStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="TrademarkInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador de marca registrada.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TrnSrc" type="OpenEnum_Type"/>
+      <xsd:element name="SessionType" type="OpenEnum_Type"/>
+      <xsd:element name="PSSCATSecLevel" type="OpenEnum_Type"/>
+      <xsd:element name="ExtBalType" type="OpenEnum_Type"/>
+      <xsd:element name="PmtEnclType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuSeismic" type="OpenEnum_Type"/>
+      <xsd:element name="ChksumType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuHeat" type="OpenEnum_Type"/>
+      <xsd:element name="NameAddrType" type="OpenEnum_Type"/>
+      <xsd:element name="CardPrefType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuAudibleAlarm" type="OpenEnum_Type"/>
+      <xsd:element name="IdentVerifyMethod" type="OpenEnum_Type"/>
+      <xsd:element name="Action" type="OpenEnum_Type"/>
+      <xsd:element name="BankAcctFeatLimitType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimCashUnits" type="OpenEnum_Type"/>
+      <xsd:element name="AckType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCamType" type="OpenEnum_Type"/>
+      <xsd:element name="CreditAuthType" type="OpenEnum_Type"/>
+      <xsd:element name="EducationalLevel" type="OpenEnum_Type"/>
+      <xsd:element name="DeliveryDestination" type="OpenEnum_Type"/>
+      <xsd:element name="CurAmtFeeStatus" type="OpenEnum_Type"/>
+      <xsd:element name="PurchasePortfolioInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador portafolio de compras.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="StmtSummType" type="OpenEnum_Type"/>
+      <xsd:element name="RefType" type="OpenEnum_Type"/>
+      <xsd:element name="GovIssueIdentType" type="OpenEnum_Type"/>
+      <xsd:element name="POSOperation" type="OpenEnum_Type"/>
+      <xsd:element name="OptSupt" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuOperation" type="OpenEnum_Type"/>
+      <xsd:element name="CertCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuCimGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MediaSubType" type="OpenEnum_Type"/>
+      <xsd:element name="BranchPreventiveLock" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Bloqueo preventivo de la oficina.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BillPmtStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevIdcType" type="OpenEnum_Type"/>
+      <xsd:element name="SecObjStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimPositionLocation" type="OpenEnum_Type"/>
+      <xsd:element name="AuthSupt" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmPositionLocation" type="OpenEnum_Type"/>
+      <xsd:element name="IntegralLock" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Bloqueo integral.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="Code" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Enumerador de codigos de lista de prevencion.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DepBkOrdStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="CustBankPrefSupt" type="OpenEnum_Type"/>
+      <xsd:element name="SocialStratum" type="OpenEnum_Type"/>
+      <xsd:element name="TerminalType" type="OpenEnum_Type"/>
+      <xsd:element name="SecObjPurpose" type="OpenEnum_Type"/>
+      <xsd:element name="IdentType" type="OpenEnum_Type"/>
+      <xsd:element name="PrcDtAdj" type="OpenEnum_Type"/>
+      <xsd:element name="EmploymentStatus" type="OpenEnum_Type"/>
+      <xsd:element name="PhoneType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuSafe" type="OpenEnum_Type"/>
+      <xsd:element name="ChkOrdStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuEnhancedAudio" type="OpenEnum_Type"/>
+      <xsd:element name="MsgSupt" type="OpenEnum_Type"/>
+      <xsd:element name="Brand" type="OpenEnum_Type"/>
+      <xsd:element name="DevPtrType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimTransport" type="OpenEnum_Type"/>
+      <xsd:element name="DevChkType" type="OpenEnum_Type"/>
+      <xsd:element name="AcctTaxType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCamOperation" type="OpenEnum_Type"/>
+      <xsd:element name="ContactType" type="OpenEnum_Type"/>
+      <xsd:element name="DwellingType" type="OpenEnum_Type"/>
+      <xsd:element name="DebitStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="Event" type="OpenEnum_Type"/>
+      <xsd:element name="SpecialHandling" type="OpenEnum_Type"/>
+      <xsd:element name="PhoneArea" type="OpenEnum_Type"/>
+      <xsd:element name="PSSNetworkType" type="OpenEnum_Type"/>
+      <xsd:element name="Freq" type="OpenEnum_Type"/>
+      <xsd:element name="POSEntryCapability" type="OpenEnum_Type"/>
+      <xsd:element name="OEDCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuIntTamper" type="OpenEnum_Type"/>
+      <xsd:element name="CashQuality" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuCdmGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MaritalStatus" type="OpenEnum_Type"/>
+      <xsd:element name="BillCycleType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de ciclo de facturación.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BankSvcChkSumStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevHealthLevel" type="OpenEnum_Type"/>
+      <xsd:element name="LegalStep" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimNoteReader" type="OpenEnum_Type"/>
+      <xsd:element name="AgentType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmIntermediateStacker" type="OpenEnum_Type"/>
+      <xsd:element name="FileType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de archivo.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="VoluntaryLock" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Bloqueo voluntario.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DeliveryMethod" type="OpenEnum_Type"/>
+      <xsd:element name="CryptType" type="OpenEnum_Type"/>
+      <xsd:element name="Role" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Rol.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TaxType" type="OpenEnum_Type"/>
+      <xsd:element name="RevOptSupt" type="OpenEnum_Type"/>
+      <xsd:element name="IdentPrevReadMethod" type="OpenEnum_Type"/>
+      <xsd:element name="PostingTotalType" type="OpenEnum_Type"/>
+      <xsd:element name="DevTtuType" type="OpenEnum_Type"/>
+      <xsd:element name="PartyAcctRelType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuProximity" type="OpenEnum_Type"/>
+      <xsd:element name="ChkAcceptStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuDepGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MediaType" type="OpenEnum_Type"/>
+      <xsd:element name="Cosigner" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				En este campo se parametriza el codeudor.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BillType" type="OpenEnum_Type"/>
+      <xsd:element name="DevPtrOperation" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimShutter" type="OpenEnum_Type"/>
+      <xsd:element name="Nationality" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Nacionalidad (Solo aplica para extranjeros).
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DevCdmType" type="OpenEnum_Type"/>
+      <xsd:element name="ServiceCode" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Codigo de Recaudo PSE
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DevAlmType" type="OpenEnum_Type"/>
+      <xsd:element name="ContactInfoType" type="OpenEnum_Type"/>
+      <xsd:element name="CustType" type="OpenEnum_Type"/>
+      <xsd:element name="TrnStatusType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Estado de la transaccion: Pendiente, exitosa, suspendida.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TrnType" type="OpenEnum_Type"/>
+      <xsd:element name="SettlementMethod" type="OpenEnum_Type"/>
+      <xsd:element name="PSSMsgEncryption" type="OpenEnum_Type"/>
+      <xsd:element name="FeeType" type="OpenEnum_Type"/>
+      <xsd:element name="PmtFormat" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuTamper" type="OpenEnum_Type"/>
+      <xsd:element name="NetworkOwner" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuHeating" type="OpenEnum_Type"/>
+      <xsd:element name="CardStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuAudio" type="OpenEnum_Type"/>
+      <xsd:element name="IdentVerifyResults" type="OpenEnum_Type"/>
+      <xsd:element name="AssignmentSrc" type="OpenEnum_Type"/>
+      <xsd:element name="BankAcctFeatType" type="OpenEnum_Type"/>
+      <xsd:element name="DevDepOperation" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimDropBox" type="OpenEnum_Type"/>
+      <xsd:element name="AddrType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmBinType" type="OpenEnum_Type"/>
+      <xsd:element name="CreditStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="EmailInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador de correo.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DeliveryInstruction" type="OpenEnum_Type"/>
+      <xsd:element name="LawyerType" type="OpenEnum_Type"/>
+      <xsd:element name="Reason" type="OpenEnum_Type"/>
+      <xsd:element name="StmtType" type="OpenEnum_Type"/>
+      <xsd:element name="ResetAuth" type="OpenEnum_Type"/>
+      <xsd:element name="GovOrg" type="OpenEnum_Type"/>
+      <xsd:element name="POSOutCapabilities" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuVandalShield" type="OpenEnum_Type"/>
+      <xsd:element name="OrgIdType" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuOperatorSwitch" type="OpenEnum_Type"/>
+      <xsd:element name="ChargeRegulation" type="OpenEnum_Type"/>
+      <xsd:element name="DevSiuCoinInGuidelight" type="OpenEnum_Type"/>
+      <xsd:element name="MediaTotalType" type="OpenEnum_Type"/>
+      <xsd:element name="BrandChangeInd" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicador del cambio de oficina.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="BillStatusCode" type="OpenEnum_Type"/>
+      <xsd:element name="DevPINOperation" type="OpenEnum_Type"/>
+      <xsd:element name="DevCimPositionStatus" type="OpenEnum_Type"/>
+      <xsd:element name="BalType" type="OpenEnum_Type"/>
+      <xsd:element name="DevCdmPositionStatus" type="OpenEnum_Type"/>
+      <xsd:element name="LinkedAcct" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de cuenta. Código Identificador del tipo de Tarjeta solicitado, el cual define si requiere o no codeudor o amparado
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DevCdmTransport" type="OpenEnum_Type"/>
+      <xsd:element name="ChannelName" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Nombre de canal
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DependentType" type="OpenEnum_Type"/>
+      <xsd:element name="ClientChgCode" type="OpenEnum_Type"/>
+      <xsd:element name="CustContactPref" type="OpenEnum_Type"/>
+      <xsd:element name="StatusMtvType" type="OpenEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Tipo de movimiento.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TINType" type="OpenEnum_Type"/>
+      <xsd:element name="SecObjType" type="OpenEnum_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza un elemento genérico, el uso depende del contexto, 
+	    	puede usarse como información adicional acerca de la transacción.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="Memo" type="Memo_Type"/>
+      <xsd:simpleType name="Memo_Type">
+		<xsd:restriction base="C">
+			<xsd:maxLength value="255"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza el estado adicional, el "StatusCode" debe contener
+			el código de respuesta primario, si el número de cuenta, fecha son inválidos el 
+			"StatusCode" podría contener uno de los dos errores y éste agregado puede 
+			contener el otro.			
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="AdditionalStatus_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:StatusCode">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el código de estatus.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ServerStatusCode">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el código de estatus del servidor.
+					</xsd:documentation>
+				</xsd:annotation>						
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:Severity">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la severidad.
+					</xsd:documentation>
+				</xsd:annotation>						
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:StatusDesc">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la descripción del estatus.
+					</xsd:documentation>
+				</xsd:annotation>						
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="AdditionalStatus" type="bbog:AdditionalStatus_Type"/>
+      <xsd:element name="ASMOrganization" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Es la cantidad de cuentas asociadas a la relación. 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="Scoring" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Score de comportamiento, puede ser negativo		
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="StopCount" type="Long_Type"/>
+      <xsd:element name="EffAcctCardsCount" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Es la cantidad de tarjetas asociadas a la cuenta vigentes. 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="SentRec" type="Long_Type"/>
+      <xsd:element name="Age" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Edad. 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="PlatformXfsCmdHResult" type="Long_Type"/>
+      <xsd:element name="PassbkNextPage" type="Long_Type"/>
+      <xsd:element name="Dependents" type="Long_Type"/>
+      <xsd:element name="PassbkLinesPerPage" type="Long_Type"/>
+      <xsd:element name="DayPastDue" type="Long_Type"/>
+      <xsd:element name="NumEmployees" type="Long_Type"/>
+      <xsd:element name="DaysCall" type="Long_Type"/>
+      <xsd:element name="Max" type="Long_Type"/>
+      <xsd:element name="CanWind" type="Long_Type"/>
+      <xsd:element name="HistRetentionDays" type="Long_Type"/>
+      <xsd:element name="DevCdmBinMaxCount" type="Long_Type"/>
+      <xsd:element name="DfltXferDaysToPay" type="Long_Type"/>
+      <xsd:element name="DevIdcCards" type="Long_Type"/>
+      <xsd:element name="DevCimBinMaxCount" type="Long_Type"/>
+      <xsd:element name="StrtAcctRelCount" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Es la cantidad de cuentas asociadas a la relación. 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="UTCOffset" type="Long_Type"/>
+      <xsd:element name="NumRec" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Es la cantidad de registros de la consulta.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="SkipNextN" type="Long_Type"/>
+      <xsd:element name="Edition" type="Long_Type"/>
+      <xsd:element name="RemainingPmtCount" type="Long_Type"/>
+      <xsd:element name="PastDuePmtCount" type="Long_Type"/>
+      <xsd:element name="PassbkNextLine" type="Long_Type"/>
+      <xsd:element name="OriginatorType" type="Long_Type"/>
+      <xsd:element name="OverdraftDays" type="Long_Type"/>
+      <xsd:element name="DaysToPay" type="Long_Type"/>
+      <xsd:element name="Min" type="Long_Type"/>
+      <xsd:element name="Count" type="Long_Type"/>
+      <xsd:element name="MatchedRec" type="Long_Type"/>
+      <xsd:element name="BinLength" type="Long_Type"/>
+      <xsd:element name="DevCimBinCount" type="Long_Type"/>
+      <xsd:element name="DfltDaysToPay" type="Long_Type"/>
+      <xsd:element name="DevCdmBinCount" type="Long_Type"/>
+      <xsd:element name="DevDepNumOfDeposits" type="Long_Type"/>
+      <xsd:element name="StrtAcctCardsCount" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Es la cantidad de tarjetas solicitadas a la cuenta.		
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="TaxYear" type="Long_Type"/>
+      <xsd:element name="NumBranchOffice" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				En este campo se parametriza la cantidad de sucursales.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="SeqNum" type="Long_Type"/>
+      <xsd:element name="CancellationReason" type="Long_Type"/>
+      <xsd:element name="RemainingInsts" type="Long_Type"/>
+      <xsd:element name="PmtAuthCount" type="Long_Type"/>
+      <xsd:element name="PassbkPagesPerBook" type="Long_Type"/>
+      <xsd:element name="PassbkNewItemsToPrint" type="Long_Type"/>
+      <xsd:simpleType name="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Extiende del tipo básico long de XSD, sirve para definir números enteros entre -2147483648 y 2147483647.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:long"/>
+	</xsd:simpleType>
+      <xsd:element name="DaysWith" type="Long_Type"/>
+      <xsd:element name="NumInsts" type="Long_Type"/>
+      <xsd:element name="DaysToEPost" type="Long_Type"/>
+      <xsd:element name="MaxRec" type="Long_Type"/>
+      <xsd:element name="CompletedPmtCount" type="Long_Type"/>
+      <xsd:element name="HoldCount" type="Long_Type"/>
+      <xsd:element name="Years" type="Long_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Años, edad. 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="DevCdmBinNum" type="Long_Type"/>
+      <xsd:element name="DevSiuVolume" type="Long_Type"/>
+      <xsd:element name="DevCamStatusPictures" type="Long_Type"/>
+      <xsd:element name="DevCimBinNum" type="Long_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza el ódigo de estado del servidor,
+	    	Si el valor es mayor a 0; la consulta fue exitosa. 
+	    	Si el valor es igual a 0 la consulta no retornó datos pero la comunicación fue exitosa.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:simpleType name="ServerStatusCode_Type">
+		<xsd:restriction base="bbog:C">
+			<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="ServerStatusCode" type="bbog:ServerStatusCode_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza la severidad de la transacción. 
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="Severity" type="bbog:Severity_Type"/>
+      <xsd:simpleType name="Severity_Type">
+		<xsd:restriction base="bbog:ClosedEnum_Type">
+			<xsd:enumeration value="Error"/>
+			<xsd:enumeration value="Warn"/>
+			<xsd:enumeration value="Info"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:simpleType name="ClosedEnum_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Extiende del tipo básico C de IFX y los valores válidos que puede tomar están especificados en el estándar. 
+				Cualquier otro dato se declara no válido.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="bbog:C">
+			<xsd:maxLength value="80"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo estan paramentrizados todos los posibles estados en 
+	    	los cuales se puede encontrar una cuenta perteneciente a la entidad.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:simpleType name="StatusCode_Type">
+		<xsd:restriction base="bbog:C">
+			<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="StatusCode" type="bbog:StatusCode_Type"/>
+      <xsd:element name="IncSummary" type="Boolean_Type"/>
+      <xsd:element name="IncImages" type="Boolean_Type"/>
+      <xsd:element name="IncEndrsmntStmp" type="Boolean_Type"/>
+      <xsd:element name="DevAppNormalOperation" type="Boolean_Type"/>
+      <xsd:element name="CaseSen" type="Boolean_Type"/>
+      <xsd:element name="AllocateAllowed" type="Boolean_Type"/>
+      <xsd:element name="GetLocationInfo" type="Boolean_Type"/>
+      <xsd:element name="GetBasicInfo" type="Boolean_Type"/>
+      <xsd:element name="IncDisc" type="Boolean_Type"/>
+      <xsd:element name="SpaceAlwd" type="Boolean_Type"/>
+      <xsd:element name="IncBillerContact" type="Boolean_Type"/>
+      <xsd:element name="SecObjInitRemKey" type="Boolean_Type"/>
+      <xsd:element name="ImmediateXfer" type="Boolean_Type"/>
+      <xsd:element name="ProdPreAppr" type="Boolean_Type"/>
+      <xsd:element name="DupChkOverride" type="Boolean_Type"/>
+      <xsd:element name="PrenoteReqd" type="Boolean_Type"/>
+      <xsd:element name="POSAttended" type="Boolean_Type"/>
+      <xsd:element name="NotifyWilling" type="Boolean_Type"/>
+      <xsd:element name="NotifyReqd" type="Boolean_Type"/>
+      <xsd:element name="ManualMicr" type="Boolean_Type"/>
+      <xsd:element name="IncSecSigLine" type="Boolean_Type"/>
+      <xsd:element name="IncHistory" type="Boolean_Type"/>
+      <xsd:element name="CustNameReqd" type="Boolean_Type"/>
+      <xsd:element name="CascadeDel" type="Boolean_Type"/>
+      <xsd:element name="AccountHolder" type="Boolean_Type"/>
+      <xsd:element name="GetFinantialInfo" type="Boolean_Type"/>
+      <xsd:element name="UpPayee" type="Boolean_Type"/>
+      <xsd:element name="IncDetail" type="Boolean_Type"/>
+      <xsd:element name="SettleInd" type="Boolean_Type"/>
+      <xsd:element name="IncBal" type="Boolean_Type"/>
+      <xsd:element name="RecXferMod" type="Boolean_Type"/>
+      <xsd:element name="ImmediatePmt" type="Boolean_Type"/>
+      <xsd:element name="DiscReqd" type="Boolean_Type"/>
+      <xsd:element name="PrintReceipt" type="Boolean_Type"/>
+      <xsd:element name="PostAddrReqd" type="Boolean_Type"/>
+      <xsd:element name="OwnerInd" type="Boolean_Type"/>
+      <xsd:simpleType name="Boolean_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Este tipo booleano, no extiende directamente de boolean de XSD sino del tipo básico string, 
+				lo restringe a valores de 1 y 0.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="ModPswdFirst" type="Boolean_Type"/>
+      <xsd:element name="IncToken" type="Boolean_Type"/>
+      <xsd:element name="IncRefInfo" type="Boolean_Type"/>
+      <xsd:element name="IncExtBal" type="Boolean_Type"/>
+      <xsd:element name="CSPCustInfoReq" type="Boolean_Type"/>
+      <xsd:element name="BackupWithholding" type="Boolean_Type"/>
+      <xsd:element name="AcceptReqd" type="Boolean_Type"/>
+      <xsd:element name="GetSecureInfo" type="Boolean_Type"/>
+      <xsd:element name="GetGeneralInfo" type="Boolean_Type"/>
+      <xsd:element name="TruncatedInd" type="Boolean_Type"/>
+      <xsd:element name="SuppressEcho" type="Boolean_Type"/>
+      <xsd:element name="IncCounts" type="Boolean_Type"/>
+      <xsd:element name="SecretOptional" type="Boolean_Type"/>
+      <xsd:element name="IncAllItems" type="Boolean_Type"/>
+      <xsd:element name="RecPmtMod" type="Boolean_Type"/>
+      <xsd:element name="GenSessKey" type="Boolean_Type"/>
+      <xsd:element name="DevChkImageEnabled" type="Boolean_Type"/>
+      <xsd:element name="PrimaryAcct" type="Boolean_Type"/>
+      <xsd:element name="POSCaptureCapability" type="Boolean_Type"/>
+      <xsd:element name="OpenAcctInd" type="Boolean_Type"/>
+      <xsd:element name="NextDay" type="bbog:Boolean_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				El proveedor del pago indica que éste debe realizarse normalmente para el próximo día. 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="ModPending" type="Boolean_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza el encabezado de la respuesta del servicio.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="SvcRs_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Define los campos obligatorios y opcionales de cualquier mensaje de 
+				respuesta enviado por un servicio con adopción	del estandar IFX.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" ref="bbog:RqUID">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identificador único del mensaje que entrega la aplicación consumidora.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:AsyncRqUID">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identificador de solicitud asincrónica, enviado por un cliente para obtener una respuesta asíncrona 
+						generada por un servidor, por lo general, en el caso de que la respuesta ha tomado demasiado tiempo 
+						para construir y ser capaz de ser enviados de manera sincrónica.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:RevClientTrnSeq">
+				<xsd:annotation>
+					<xsd:documentation>
+						Secuencia de transación del cliente para reversos.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Informacion del estado de la respuesta de la transaccion-->
+			<xsd:element minOccurs="1" ref="bbog:Status">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información del estado de la respuesta de la transacción.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:CustId">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información del usuario que autentica el servicio.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:NextDay">
+				<xsd:annotation>
+					<xsd:documentation>
+						El proveedor del pago indica que éste debe realizarse normalmente para el próximo día.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ServerTerminalSeqId">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifiador secuencia termianl generado por el servidor (CSP) en un ambiente ATM o POS.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:NetworkTrnInfo">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información de la transacción en la Red sobre el procesamiento de la red, 
+						es decir, propietario, ubicación, código de banco y el número de referencia asignado por la red durante 
+						el procesamiento de la transacción.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ServerDt">
+				<xsd:annotation>
+					<xsd:documentation>
+						Fecha del servidor.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="SvcRs" type="bbog:SvcRs_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			El agregado "Status" es usado en cada respuesta para indicar el estatus del mensaje, en ausencia, el valor por omisión es cero.
+			La información de la severidad significa que éste estado no impide que el servidor acepte el mensaje, servicio o documento.
+			La severidad de advertecia significa que éste estado no impide que el servidor acepte el mensaje, servicio o documento.
+			Sinembargo, no toda la información podría haber sido retornada al cliente. Por ejemplo, muchos registros soliitados.
+			La severidad de error significa que el servidor declinó el mensaje, servicio o documento. El servidor podría retornar un 
+			SPRefId y/o CSPRefId, donde se presente, por propósitos de seguimiento, sinembargo el retorno de éstos elementos no es
+			garantizado.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="Status_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				En este campo se parametriza la información del estado de la respuesta de la transacción.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:StatusCode">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo estan paramentrizados todos los posibles estados en 
+	    				los cuales se puede encontrar una cuenta perteneciente a la entidad.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ServerStatusCode">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el código de estado del servidor,
+	    				Si el valor es mayor a 0; la consulta fue exitosa. 
+	    				Si el valor es igual a 0 la consulta no retornó datos pero la comunicación fue exitosa.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:Severity">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la severidad de la transacción. 
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:StatusDesc">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la descripción del estado.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ServerStatusDesc">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la descripción estado del servidor.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="bbog:AdditionalStatus">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el estado adicional, el "StatusCode" debe contener
+						el código de respuesta primario, si el número de cuenta, fecha son inválidos el 
+						"StatusCode" podría contener uno de los dos errores y éste agregado puede 
+						contener el otro.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Optional: Informacion asociada a respuesta asincrona -->
+			<xsd:element minOccurs="0" ref="bbog:AsyncRsInfo">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información de respuesta asíncrona.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="Status" type="bbog:Status_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza la información de respuesta asíncrona.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="AsyncRsInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:AvailDt">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la fecha en la que los fondos de la cuenta son disponibles.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ExpDt">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la fecha de vencimiento.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="AsyncRsInfo" type="bbog:AsyncRsInfo_Type"/>
+      <xsd:element name="MsgDt" type="DateTime_Type"/>
+      <xsd:element name="ServerDt" type="DateTime_Type"/>
+      <xsd:element name="ExpectedAvailDt" type="DateTime_Type"/>
+      <xsd:element name="NextDt" type="DateTime_Type"/>
+      <xsd:element name="EffDt" type="DateTime_Type"/>
+      <xsd:element name="ClientDt" type="DateTime_Type"/>
+      <xsd:element name="ExpectedOpenDt" type="DateTime_Type"/>
+      <xsd:element name="ClientBusinessDt" type="DateTime_Type"/>
+      <xsd:element name="StartDt" type="DateTime_Type"/>
+      <xsd:element name="PlatformXfsTimestamp" type="DateTime_Type"/>
+      <xsd:element name="ExpDt" type="DateTime_Type"/>
+      <xsd:element name="IssDt" type="DateTime_Type"/>
+      <xsd:element name="CreditHeldAmtExpDt" type="DateTime_Type"/>
+      <xsd:element name="ClientCreateDt" type="DateTime_Type"/>
+      <xsd:simpleType name="DateTime_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Definido como extensión del tipo string que cumple con la expresión regular dada en el patrón.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}(:[0-9]{2}(\.[0-9]{6})?((-|\+)[0-9]{2}:[0-9]{2})?)?)?"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="AvailDt" type="DateTime_Type"/>
+      <xsd:element name="SessionDt" type="DateTime_Type"/>
+      <xsd:element name="OrigIssueDt" type="DateTime_Type"/>
+      <xsd:element name="EndDt" type="DateTime_Type"/>
+      <xsd:element name="CreatedDt" type="DateTime_Type"/>
+      <xsd:element name="ForExValDt" type="DateTime_Type"/>
+      <xsd:element name="TrnRqUID" type="UUID_Type"/>
+      <xsd:element name="RelatedItemInqRqUID" type="UUID_Type"/>
+      <xsd:element name="BillId" type="UUID_Type"/>
+      <xsd:simpleType name="UUID_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				UUID es un identificador que extiende de Narrow Character IFX, es de 36 caracteres. 
+				El objetivo es que represente un identificador único dentro de tiempo y espacio.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="NC">
+			<xsd:maxLength value="36"/>
+			<xsd:pattern value="([0-9]|[a-f]|[A-F]){8}(-([0-9]|[a-f]|[A-F]){4})(-([0-9]|[a-f]|[A-F]){4})(-([0-9]|[a-f]|[A-F]){4})(-([0-9]|[a-f]|[A-F]){12})"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="RqUID" type="UUID_Type"/>
+      <xsd:element name="DiscId" type="UUID_Type"/>
+      <xsd:element name="SvcRqUID" type="UUID_Type"/>
+      <xsd:element name="ReconRqUID" type="UUID_Type"/>
+      <xsd:element name="AsyncRqUID" type="UUID_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza la información del usuario que autentica el servicio.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="CustId_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="SPName">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el nombre del proveedor de servicio.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" ref="CustPermId">
+					<xsd:annotation>
+						<xsd:documentation>
+							En este campo se parametriza ID permanente del cliente, usado como una 
+	    					llave de base de datos para identificar de forma única un intercambio
+	    					financiero o cliente CSP. No puede ser modificado por el cliente.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element minOccurs="0" ref="CustLoginId">
+					<xsd:annotation>
+						<xsd:documentation>
+							En este campo se parametriza el ID inicio sesión del cliente.
+							Usuario STA Campo de tres partes, el tercero  muestra el ID 
+							del usuario que realizó la modificación.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element minOccurs="0" ref="CustType">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el tipo de cliente.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="UserId" type="bbog:CustId_Type"/>
+      <xsd:element name="CustId" type="bbog:CustId_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza el ID inicio sesión del cliente.
+			Usuario STA Campo de tres partes, el tercero  muestra el ID 
+			del usuario que realizó la modificación.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="CustLoginId" type="bbog:CustLoginId_Type"/>
+      <xsd:simpleType name="CustLoginId_Type">
+		<xsd:restriction base="bbog:NC">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza ID permanente del cliente, usado como una 
+	    	llave de base de datos para identificar de forma única un intercambio
+	    	financiero o cliente CSP. No puede ser modificado por el cliente.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="CustPermId" type="bbog:CustPermId_Type"/>
+      <xsd:simpleType name="CustPermId_Type">
+		<xsd:restriction base="bbog:NC">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza la información de la transacción en la Red sobre el procesamiento de la red, 
+			es decir, propietario, ubicación, código de banco y el número de referencia asignado por la red durante 
+			el procesamiento de la transacción.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="NetworkTrnInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="NetworkOwner">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el propietario de Red, el nombre de la persona u organización 
+						que posee la red de origen, los valores definidos son ATM, POS, ACH, FedNet, SWIFT, Rama, 
+						CallCenter, Otros.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="TerminalId">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el identificador de terminal, tal como el código de terminal o
+						número de terminal ATM.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="TerminalType">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el tipo de terminal, valores definidos AdminTerm, ATM, POS, 
+						CustomerDevice, ECR, DialCash, TravelerCheckDispenser, FuelPump, ScripTerm, CouponTerm, 
+						TicketTerm, POBTerm, Teller, Utility, Vending, Payment, VRU.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="BankId">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el código bancario el cual viene de CRM.
+	    				Indica cual banco dentro del holding esta asociado a la cuenta.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:sequence minOccurs="0">
+				<xsd:element minOccurs="0" ref="Desc">
+					<xsd:annotation>
+						<xsd:documentation>
+							En este campo se parametriza la descripción.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element minOccurs="0" ref="Name">
+					<xsd:annotation>
+						<xsd:documentation>
+							En este campo se parametriza el nombre.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="NetworkTrnInfo" type="bbog:NetworkTrnInfo_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza la descripción.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:simpleType name="Desc_Type">
+		<xsd:restriction base="bbog:C">
+			<xsd:maxLength value="500"/>  
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="TargetChnValue" type="bbog:Desc_Type"/>
+      <xsd:element name="TargetChnNick" type="bbog:Desc_Type"/>
+      <xsd:element name="RejectionDesc" type="bbog:Desc_Type">
+		<xsd:annotation>
+			<xsd:documentation>
+				Descripción de rechazo
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="OtherIncomeDesc" type="bbog:Desc_Type"/>
+      <xsd:element name="Desc" type="bbog:Desc_Type"/>
+      <xsd:element name="CustTypeDesc" type="bbog:Desc_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza el nombre.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="SegmentName" type="Name_Type"/>
+      <xsd:simpleType name="Name_Type">
+		<xsd:restriction base="C">
+			<xsd:maxLength value="40"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="Name" type="Name_Type"/>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza el código bancario el cual viene de CRM.
+	    	Indica cual banco dentro del holding esta asociado a la cuenta.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:simpleType name="BankId_Type">
+		<xsd:restriction base="NC">
+			<xsd:maxLength value="34"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="BankId" type="bbog:BankId_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza la información del ambiente que origina la invocación.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="BaseEnvr_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="Desc">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la descripción del ambiente origen.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="Name">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el código único que identifica al ambiente origen.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="ClientBusinessDt">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la fecha y hora del ambiente.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="BaseEnvr" type="BaseEnvr_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			Agregado con informacion de la consulta, o parametros de la
+			consulta.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="CustomInqInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:StmtType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Atributo a consultar
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:RefType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Operador de comparación para búsqueda.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:MsgType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Columna por la cual se orden la informacion
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="CustomInqInfo" type="CustomInqInfo_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza la información de referencia del objeto IFX.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="RefInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="RefType" type="OpenEnum_Type">
+				<xsd:annotation>
+					<xsd:documentation>
+						Tipo de referencia.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="RefId" type="Identifier_Type">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identificador de referencia.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Name" type="Name_Type">
+				<xsd:annotation>
+					<xsd:documentation>
+						Nombre de la referencia.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Desc" type="Desc_Type">
+				<xsd:annotation>
+					<xsd:documentation>
+						Descripción de la referencia.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="RefInfo" type="RefInfo_Type"/>
+      <xsd:annotation> 
+		<xsd:documentation>
+			Agregado con informacion de presentación de encabezado de
+			consulta, para paginacion
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="RecCtrlIn" type="RecCtrlIn_Type"/>
+      <xsd:complexType name="RecCtrlIn_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:SentRec">
+				<xsd:annotation>
+					<xsd:documentation>
+						Numero de pagina
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:MaxRec">
+				<xsd:annotation>
+					<xsd:documentation>
+						Cantidad de registros por pagina.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:Desc">
+				<xsd:annotation>
+					<xsd:documentation>
+						Columna por la cual se orden la informacion
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="bbog:CustomInqInfo">
+				<xsd:annotation>
+					<xsd:documentation>
+						Agregado con informacion de la consulta, o parametros de la consulta.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:annotation>
+	    <xsd:documentation>
+	    	En este campo se parametriza el nombre de la operación.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:simpleType name="DomainName_Type">
+		<xsd:restriction base="C">
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+      <xsd:element name="DomainName" type="DomainName_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			En este campo se parametriza el encabezado de la petición del servicio.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="SvcRq" type="bbog:SvcRq_Type"/>
+      <xsd:complexType name="SvcRq_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" ref="bbog:RqUID">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identificador único del mensaje que entrega la aplicación.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:AsyncRqUID">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identificador de solicitud asincrónica, enviado por un cliente para obtener una respuesta asíncrona 
+						generada por un servidor, por lo general, en el caso de que la respuesta ha tomado demasiado tiempo 
+						para construir y ser capaz de ser enviados de manera sincrónica.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:RevClientTrnSeq">
+				<xsd:annotation>
+					<xsd:documentation>
+						Secuencia de transación del cliente para reversos.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:CustId">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información del usuario que autentica el servicio.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:NextDay">
+				<xsd:annotation>
+					<xsd:documentation>
+						El proveedor del pago indica que éste debe realizarse normalmente para el próximo día.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:BaseEnvr">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información del ambiente que origina la invocación.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ClientTerminalSeqId">
+				<xsd:annotation>
+					<xsd:documentation>
+						 Identificador de secuencia generado por la terminal del cliente 
+						 en un ambiente de oficina/CallCenter/cajero.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:TrnStatusType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Tipo de estado de la transacción.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:NetworkTrnInfo">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información de la transacción en la Red sobre el procesamiento de la red, 
+						es decir, propietario, ubicación, código de banco y el número de referencia asignado por la red durante 
+						el procesamiento de la transacción.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:ClientDt">
+				<xsd:annotation>
+					<xsd:documentation>
+						Tiempo de acuerdo con el cliente, se puede comparar con el tiempo del servidor
+						para determinar si hay una discrepancia.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:annotation>
+		<xsd:documentation>
+			Este objeto se utiliza como contenedor general para los mensajes de error de la plataforma SOA. 
+			Incluye internamente el agregado status de IFX.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="GeneralException_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" ref="RqUID">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza el identificador único del mensaje que entrega la aplicación 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" ref="Status">
+				<xsd:annotation>
+					<xsd:documentation>
+						En este campo se parametriza la información del estado de la respuesta de la transacción.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="GeneralException" type="GeneralException_Type"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			Agregado con informacion de presentación de encabezado de
+			consulta, para paginacion
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="RecCtrlOut" type="RecCtrlOut_Type"/>
+      <xsd:complexType name="RecCtrlOut_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:MatchedRec">
+				<xsd:annotation>
+					<xsd:documentation>
+						Número total de miembros
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:MaxRec">
+				<xsd:annotation>
+					<xsd:documentation>
+						Cantidad total de páginas
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:SentRec">
+				<xsd:annotation>
+					<xsd:documentation>
+						Numero de pagina
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:SeqNum">
+				<xsd:annotation>
+					<xsd:documentation>
+						Número de miembro
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:Desc">
+				<xsd:annotation>
+					<xsd:documentation>
+						Columna por la cual se orden la informacion
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+    </xsd:schema>
+        <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn://bancodebogota.com/rdm/classification/v1/" xmlns:Q1="urn://bancodebogota.com/rdm/classification/v1/" xmlns:bbog="urn://bancodebogota.com/ifx/base/v1/" xmlns:bons0="urn://bancodebogota.com/ifx/base/v1/" xmlns:rdm="urn://bancodebogota.com/rdm/classification/v1/">
+      <xsd:import namespace="urn://bancodebogota.com/ifx/base/v1/"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			Informacion de cada miembro.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="EntityMemberInfo" type="rdm:EntityMemberInfo_Type"/>
+      <xsd:complexType name="EntityMemberInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:Identifier">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID del miembro Actual
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" ref="bbog:Memo"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="rdm:AttributeInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:annotation>
+		<xsd:documentation>
+			Informacion de cada miembro.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="AttributeInfo" type="rdm:AttributeInfo_Type"/>
+      <xsd:complexType name="AttributeInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:Identifier">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID del Atributo actual
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:IdentType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Tipo del atributo actual en rdm.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element minOccurs="0" ref="bbog:StatusDesc"/>
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:annotation>
+		<xsd:documentation>
+			Agregado con la información de cada miembro, miembros y
+			atributos.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:element name="EntityMembersRec" type="rdm:EntityMembersRec_Type"/>
+      <xsd:complexType name="EntityMembersRec_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bbog:AgentId">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID de la Entidad del Miembro Actual en RDM.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:DevId">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID del Modelo del Miembro Actual en RDM.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="bbog:Version">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID de la Versión del Miembro Actual en RDM.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="rdm:EntityMemberInfo">
+				<xsd:annotation>
+					<xsd:documentation>
+						ID de la Versión del Miembro Actual en RDM.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+      <xsd:element name="EntityInfo" type="Q1:EntityInfo_Type"/>
+      <xsd:complexType name="EntityInfo_Type">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="bons0:Identifier"/>
+			<xsd:element minOccurs="0" ref="bons0:Name"/>
+			<xsd:element minOccurs="0" ref="bons0:DomainName"/>
+			<xsd:element minOccurs="0" ref="bons0:Version"/>
+		</xsd:sequence>
+	</xsd:complexType>
+    </xsd:schema>
+        <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn://bancodebogota.com/rdm/classification/event/" xmlns:bbog="urn://bancodebogota.com/ifx/base/v1/" xmlns:bons0="urn://bancodebogota.com/rdm/classification/v1/" xmlns:rdm="urn://bancodebogota.com/rdm/classification/v1/" xmlns:tns="urn://bancodebogota.com/rdm/classification/event/">
+      <xsd:import namespace="urn://bancodebogota.com/rdm/classification/v1/"/>
+      <xsd:import namespace="urn://bancodebogota.com/ifx/base/v1/"/>
+      <xsd:annotation>
+		<xsd:documentation>
+			Obtener miembros de entidades RDM. 
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="EntityMembersInqRq_Type">
+		<xsd:complexContent>
+			<xsd:extension base="bbog:SvcRq_Type">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="bons0:EntityInfo">
+					</xsd:element>
+					<xsd:element minOccurs="0" ref="bbog:RecCtrlIn"/>
+					<xsd:element minOccurs="0" ref="bbog:RefInfo"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+      <xsd:element name="EntityMembersInqRq" type="tns:EntityMembersInqRq_Type">
+	</xsd:element>
+      <xsd:annotation>
+		<xsd:documentation>
+			Obtener miembros de entidades RDM.
+		</xsd:documentation>
+	</xsd:annotation>
+      <xsd:complexType name="EntityMembersInqRs_Type">
+		<xsd:complexContent>
+			<xsd:extension base="bbog:SvcRs_Type">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" ref="bbog:RecCtrlOut"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="rdm:EntityMembersRec"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+      <xsd:element name="EntityMembersInqRs" type="tns:EntityMembersInqRs_Type"/>
+    </xsd:schema>
+    </wsdl:types>
+	<!-- ******  -->	
+	<wsdl:message name="getEntityMembersRequest">
+		<wsdl:part element="tns:getEntityMembersRequest" name="EntityMembersInqRq"/>
+	</wsdl:message>
+	<wsdl:message name="getEntityMembersResponse">
+		<wsdl:part element="tns:getEntityMembersResponse" name="EntityMembersInqRs"/>
+	</wsdl:message>
+	<wsdl:message name="getEntityMembersFault">
+		<wsdl:part element="Q1:GeneralException" name="parameters"/>
+	</wsdl:message>	
+	
+	<!-- ******  -->	
+	<wsdl:portType name="EntityMembersManagement">
+		<wsdl:operation name="getEntityMembers">
+			<wsdl:input message="tns:getEntityMembersRequest"/>
+			<wsdl:output message="tns:getEntityMembersResponse"/>
+			<wsdl:fault message="tns:getEntityMembersFault" name="fault"/>
+		</wsdl:operation>		
+		
+	</wsdl:portType>
+	<!-- ******  -->
+	<wsdl:binding name="EntityMembersManagementBinding" type="tns:EntityMembersManagement">
+
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getEntityMembers">
+
+			<soap:operation soapAction="urn://bancodebogota.com/rdm/classification/getEntityMembers"/>
+			<wsdl:input>
+
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="EntityMembersManagementSvc">
+		<wsdl:port binding="tns:EntityMembersManagementBinding" name="EntityMembersManagementPort">
+			<soap:address location="http://ESBBBOG:7800/rdm/EntityMembersManagement"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

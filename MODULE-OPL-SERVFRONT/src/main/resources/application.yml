@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    description: @project.description@
+    logo: bdblogo.png
+  # datasource:
+    # url: ---
+    # username: ---
+    # password: ---
+    # driver-class-name: oracle.jdbc.driver.OracleDriver
+    # jndi-name: DBOpl
+
+  #jpa:
+    #database-platform: org.hibernate.dialect.Oracle12cDialect
+

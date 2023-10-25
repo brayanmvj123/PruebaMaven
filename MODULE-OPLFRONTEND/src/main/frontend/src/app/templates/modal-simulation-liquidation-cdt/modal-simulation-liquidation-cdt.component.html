@@ -1,0 +1,44 @@
+<mat-dialog-content class="bb-modal">
+    <div class="bb-modal-icon" [class.bb-modal-loading]="data.loadingContent">
+        <div class="bb-icon-canvas" [ngClass]="data.icon" [ngSwitch]="data.icon">
+            <div class="bb-icon-text" *ngSwitchCase="'question'">?</div>
+        </div>
+    </div>
+    <div *ngIf="!data.loadingContent">
+    </div>
+    <div *ngIf="data.loadingContent">
+        <div class="loading-list">
+            <div class="loading-item" *ngFor="let l of data.loadingList">
+                <div class="loading-check">
+                    <div class="item-loading" *ngIf="l.loading === 1">
+                        <div uk-spinner="ratio: .6">
+                            <fa-icon [icon]="['fas', 'cog']"></fa-icon>
+                        </div>
+                    </div>
+                    <div class="item-waiting" *ngIf="l.loading === 0">
+                        <fa-icon [icon]="['fas', 'cog']"></fa-icon>
+                    </div>
+                    <div class="item-success" *ngIf="l.loading === 2">
+                        <fa-icon [icon]="['far', 'check-circle']"></fa-icon>
+                    </div>
+                    <div class="item-danger" *ngIf="l.loading === 3">
+                        <fa-icon [icon]="['far', 'times-circle']"></fa-icon>
+                    </div>
+                </div>
+                <div class="loading-name" [class.msg-success]="l.loading === 2" [class.msg-danger]="l.loading === 3"
+                    [class.msg-waiting]="l.loading === 1" [innerText]="l.name"></div>
+            </div>
+        </div>
+
+        <div class="uk-margin-small-top" *ngIf="data.showCloseOnError.show">
+            <div class="uk-text-right bb-control">
+                <button mat-flat-button color="warn" mat-dialog-close [innerText]="data.closeText"></button>
+            </div>
+        </div>
+        <div class="uk-margin-small-top" *ngIf="data.showConfirmOnSuccess.show">
+            <div class="uk-text-right bb-control">
+                <button mat-flat-button color="primary" [mat-dialog-close]="data" [innerText]="data.okText"></button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

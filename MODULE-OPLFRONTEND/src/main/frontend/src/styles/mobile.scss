@@ -1,0 +1,167 @@
+/**
+ * Copyright (c) 2020 Banco de Bogotá. All Rights Reserved.
+ * <p>
+ * OPALOBF-FRONT was developed by Team Deceval BDB
+ * <p>
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * proprietary and confidential. For use this code you need to contact to
+ * Banco de Bogotá and request exclusive use permission.
+ * <p>
+ * This file was write by Jose Buelvas <jbuelva@bancodebogota.com.co>.
+ */
+
+// Sidebar ============================================================================================================>
+.content {
+    position: relative;
+    section {
+        padding: 0 1rem 1rem;
+    }
+}
+
+.sidebar {
+    background-color: transparent;
+    box-shadow: none;
+    width: 100vw;
+}
+
+#main-content {
+    margin-left: 0;
+}
+
+// Header =============================================================================================================>
+.main-header {
+    flex-wrap: nowrap;
+    height: 70px;
+    .logo {
+        padding-right: .5rem;
+        >.uname {
+            width: auto;
+            margin-right: .5rem;
+        }
+    }
+    .username {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .menu-toggle {
+        margin: 0 0 0 .4rem;
+    }
+}
+
+.uk-open {
+    >.uk-offcanvas-bar {
+        box-shadow: 0 4px 20px 1px rgba(0, 0, 0, .06), 0 1px 4px rgba(0, 0, 0, .1);
+    }
+}
+
+.uk-offcanvas-bar {
+    background-color: $bdb-color-dark-2;
+    padding: 0;
+}
+
+// Search banner ======================================================================================================>
+.search-banner {
+    position: relative;
+    display: block;
+    box-sizing: content-box;
+    margin-top: 1rem;
+    .search-input {
+        width: 100%;
+        box-sizing: border-box;
+        &:focus {
+            width: 100%;
+        }
+    }
+    &.first-search {
+        display: block;
+        .search-input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.users {
+    .search-banner {
+        &.first-search {
+            top: 90px;
+        }
+    }
+}
+
+// Project distribution ================================================================================================
+form {
+    .group {
+        &.bb-grid-h {
+            margin-top: 0 !important;
+        }
+    }
+}
+
+.project-distribution {
+    .uk-grid-margin {
+        margin-top: 10px;
+    }
+    &.consult {
+        [uk-grid] {
+            >div {
+                &:nth-of-type(odd) {
+                    .bb-grid-h {
+                        background: rgb(247, 247, 247);
+                        background: linear-gradient(90deg, rgba($light-gray-1, 1) 0%, rgba(0, 212, 255, 0) 100%);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Datatable ===========================================================================================================
+.bdb-datatable-scroll {
+    thead {
+        tr {
+            >th {
+                padding: 13px 6px;
+                position: relative;
+                .ttable-icon {
+                    position: absolute;
+                }
+            }
+        }
+    }
+}
+
+// Grid ===============================================================================================================
+.bb-grid {
+    display: block;
+    >label {}
+    >*:first-child {
+        width: auto;
+    }
+    >*:last-child {
+        width: auto;
+    }
+}
+
+.user-connection,
+.user-creation {
+    width: 100% !important;
+}
+
+.bb-h-menu {
+    >* {
+        flex-grow: 1;
+    }
+    li {
+        >a {
+            padding: 10px !important;
+        }
+    }
+}
+
+.request-control {
+  button {
+    width: 30%;
+  }
+}

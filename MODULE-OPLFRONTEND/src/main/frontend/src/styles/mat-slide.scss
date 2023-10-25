@@ -1,0 +1,18 @@
+@import "theming";
+
+.mat-slide-toggle {
+
+  &.mat-primary {
+
+    &.mat-checked {
+
+      .mat-slide-toggle-bar {
+        background-color: rgba($bdb-color, .54);
+      }
+
+      .mat-slide-toggle-thumb {
+        background-color: rgba($bdb-color, 1);
+      }
+    }
+  }
+}

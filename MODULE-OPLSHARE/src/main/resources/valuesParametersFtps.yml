@@ -1,0 +1,8 @@
+texto:
+  controller:
+    service:
+      control:
+        username: gcelest
+        password: Septiembre2019
+        hostname: 10.86.82.73
+        puerto: 1500

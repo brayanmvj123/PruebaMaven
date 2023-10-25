@@ -1,0 +1,41 @@
+@import "src/theming";
+.bb-users {
+    margin: 0;
+}
+
+.new-reg {
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.center-h {
+    justify-content: center;
+}
+
+.center-v {
+    align-items: center;
+}
+
+.textSizeBody {
+    font-size: 0.75rem;
+}
+
+.color-icon-delete {
+    color: red;
+}
+
+.color-icon-get {
+    color: orange;
+}
+
+.color-icon-update {
+    color: green;
+}

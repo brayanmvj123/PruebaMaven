@@ -1,0 +1,23 @@
+.simulador {
+    width: 630px;
+    margin: 2rem auto;
+}
+
+.not-enable-date {
+    /*background: red;rgb(255, 65, 65);*/
+    border-radius: 100%;
+}
+
+.not-enable-date div {
+    color: red;
+    border: 1px solid red;
+}
+
+.not-enable-date .mat-calendar-body-selected {
+    background: rgb(255, 65, 65);
+    color: white;
+}
+
+.varDinamic {
+    height: 90%;
+}

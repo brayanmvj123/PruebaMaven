@@ -1,0 +1,73 @@
+<div>
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+    <div>
+        <div class="uk-animation-slide-bottom-medium">
+
+            <h3 class="bb-title uk-text-center"> Oficina(s) sin información.</h3>
+
+            <div class="card">
+                <div class="card-body">
+
+                    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                        <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+
+                            <form [ngClass]="{}" [formGroup]="createOfficeForm" class="simulador" method="post" (ngSubmit)="doCreation(index, tab)" novalidate>
+
+                                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                                    <div class="group bb-grid-h">
+                                        <label for="num_oficina">Número de oficina:</label>
+                                        <div>
+                                            <input type="number" class="uk-input uk-text-center" id="num_oficina" name="num_oficina" formControlName="num_oficina" value="{{tab}}" [readOnly]="true">
+                                            <div class="s-message error required">Este campo es requerido.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                                        <div class="group bb-grid-h">
+                                            <label for="cargo">Cargo:</label>
+                                            <div>
+                                                <input type="text" class="uk-input uk-text-center" id="cargo" name="cargo" formControlName="cargo" maxlength="25" autocomplete="off" required>
+                                                <div class="s-message error required">Este campo es requerido.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                                    <div class="group bb-grid-h">
+                                        <label for="nom_resp">Nombre del responsable:</label>
+                                        <div>
+                                            <input type="text" class="uk-input uk-text-center" id="nom_resp" name="nom_resp" formControlName="nom_resp" maxlength="25" autocomplete="off" required>
+                                            <div class="s-message error required">Este campo es requerido.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                                    <div class="group bb-grid-h">
+                                        <label for="email">Usuario de red:</label>
+                                        <div>
+                                            <input type="text" class="uk-input uk-text-center" id="email" name="email" formControlName="email" maxlength="25" autocomplete="off" required>
+                                            <div class="s-message error required">Este campo es requerido.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button mat-raised-button type="submit" class="uk-button uk-button-primary" [disabled]="!createOfficeForm.valid">
+                                  <span>Cargar información</span>
+                                </button>
+
+                            </form>
+
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

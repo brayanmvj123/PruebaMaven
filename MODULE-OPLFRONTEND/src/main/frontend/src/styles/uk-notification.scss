@@ -1,0 +1,33 @@
+@import "theming";
+
+.uk-notification-message {
+  font-size: 14px;
+  border-radius: 4px;
+  color: #fff;
+
+  // Close -----
+  .uk-close {
+    color: #fff;
+    top: 17px;
+  }
+
+  // Danger -----
+  &.uk-notification-message-danger {
+    background-color: $danger-color;
+  }
+
+  // Primary
+  &.uk-notification-message-primary {
+    background-color: $bdb-color-dark;
+  }
+
+  // Success
+  &.uk-notification-message-success {
+    background-color: $success-color;
+  }
+
+  // Warning
+  &.uk-notification-message-warning {
+    background-color: $bdb-orange;
+  }
+}

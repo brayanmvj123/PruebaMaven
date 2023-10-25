@@ -1,0 +1,121 @@
+<div class="content uk-animation-slide-left-small">
+
+     <!-- sidebar -->
+  <div #sidebarContent id="sidebar-content" class="sidebar">
+    <bdb-sidebar [enableView]="enableView"></bdb-sidebar>
+  </div>
+  <!-- end sidebar -->
+
+  <!-- sidebar mobile -->
+  <div id="mobile-sidebar" class="sidebar" uk-offcanvas="overlay: true" *ngIf="isMobileVersion">
+    <div class="uk-offcanvas-bar">
+      <bdb-sidebar [enableView]="enableView"></bdb-sidebar>
+    </div>
+  </div>
+  <!-- end sidebar mobile -->
+
+    <!-- start main content -->
+    <main  #mainContent id="main-content">
+
+            <!-- navigation bar -->
+            <header class="main-header">
+
+                <!-- menu toggle -->
+                <div class="menu-toggle" 
+                    *ngIf="!isMobileVersion"
+                    [class.is-open]="sidebarIsOpen"
+                    [attr.uk-tooltip]="sidebarIsOpen ? 'title: Ocultar menú; pos: right' : 'title: Ver menú; pos: right'"
+                    (click)="toggleSidebar()">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="menu-toggle" *ngIf="isMobileVersion" uk-toggle="target: #mobile-sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <!-- end menu toggle -->
+
+                <div class="username uk-text-center">
+                    <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                    BIENVENIDO {{userData.name}}
+                </div>
+
+                <!-- logo -->
+                <div class="logo">
+
+                    <div class="uname">
+                        <button (click)="logout()" uk-tooltip="title: Cerrar sesión; pos: left">
+                            <span uk-icon="icon: sign-out"></span>
+                        </button>
+                    </div>
+                    <!-- <img src="./assets/img/sqlogo.png" alt="logo"> -->
+                </div>
+                <!-- end logo -->
+            </header>
+            <!-- end navigation bar -->
+
+            <router-outlet></router-outlet>
+    </main>
+    <!-- end main content -->
+
+    <!-- popup logout -->
+    <div class="uk-flex-top bb-modal-loggedout" id="logged-out" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-animation-shake bb-login-box uk-margin-auto-vertical">
+
+            <!-- login form -->
+            <form #loginElement [formGroup]="loginForm" class="login-form" method="post" (ngSubmit)="submitForm()"
+                novalidate>
+
+                <!-- logo -->
+                <div class="bdb-logo">
+                    <img src="./assets/img/bdb_logo.svg" alt="Banco de Bogotá">
+                </div>
+
+                <div class="login-t">Renueva tu sesión para seguir haciendo uso de la plataforma.</div>
+
+                <!-- username -->
+                <div class="group">
+                    <input type="text" class="uk-input" id="reusername" name="username" formControlName="username"
+                        placeholder="Nombre de usuario" autocomplete="off" title="" required>
+                    <div class="message error">Este campo es requerido.</div>
+                </div>
+
+                <!-- password -->
+                <div class="group" (bdbCapsLock)="capsLock=$event">
+                    <div class="merged">
+                        <input type="{{eyeOpened ? 'text' : 'password'}}" class="uk-input" id="repassword"
+                            name="password" formControlName="password" placeholder="Contraseña" title="" required>
+                        <button type="button" class="right-l" (mousedown)="eye()" (mouseup)="eye()">
+                            <fa-icon [icon]="['fas', eyeOpened ? 'eye' : 'eye-slash']"></fa-icon>
+                        </button>
+
+                    </div>
+                    <div class="caps-lock" *ngIf="capsLock">Bloq mayús Activado</div>
+                    <div class="message error">Este campo es requerido.</div>
+                </div>
+
+                <!-- domain -->
+                <div class="group">
+                    <select class="uk-select" id="domain" name="domain" formControlName="domain" title="" required>
+                        <option value="" selected disabled hidden>Dominio</option>
+                        <option *ngFor="let d of domains | keyvalue" [value]="d.key" [innerText]="d.value"></option>
+                    </select>
+                    <div class="message error">Este campo es requerido.</div>
+                </div>
+
+                <!-- submit -->
+                <div class="submit-group uk-text-center">
+                    <button type="submit" id="js-modal-confirm" class="uk-button uk-button-primary"
+                        [disabled]="loginForm.invalid || authLoading">
+                        <span *ngIf="!authLoading">Ingresar ahora</span>
+                        <div *ngIf="authLoading" uk-spinner="ratio: 1"></div>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!-- end popup logout -->
+</div>

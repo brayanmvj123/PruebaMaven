@@ -1,0 +1,286 @@
+<section class="users uk-animation-slide-bottom-medium">
+    <!-- title heading -->
+    <div class="breadcrumb">
+        <h1>Simulador CDTs Desmaterializado</h1>
+    </div>
+    <div class="breadcrumb-separator"></div>
+    <!-- end title heading -->
+
+    <!-- Sección flotante para visualizar el factor seleccionado -->
+    <div class="uk-position-absolute uk-height-1-1 to-right-1rem varDinamic" *ngIf="enableFactor">
+        <div class="dumbledore uk-animation-slide-top">
+            <div class="hogwart">
+                <div>
+                    <strong>Factor seleccionado</strong>
+                    <div>{{factorSelect}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form [ngClass]="{}" [formGroup]="simulador" class="simulador" method="post" (ngSubmit)="doCreation()" novalidate>
+                <!-- Valor nominal -->
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <div class="group bb-grid-h">
+                        <label for="valor_nominal">Valor nominal:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="valor_nominal" name="valor_nominal" formControlName="valor_nominal" mask="separator.4" maxlength="25" prefix="$" thousandSeparator="," autocomplete="off" required>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Valor nominal -->
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Fecha apertura -->
+                    <div class="group bb-grid-h">
+                        <label for="fecha_apertura">Fecha apertura:</label>
+                        <div class="merged">
+                            <input type="text" class="uk-input" id="fecha_apertura" matInput [matDatepicker]="pickerConsc" name="fecha_apertura" formControlName="fecha_apertura" placeholder="aaaa/mm/dd" (dateChange)="addEvent('changeAper', $event)" autocomplete="off">
+                            <mat-datepicker [dateClass]="selectedDateClass" #pickerConsc></mat-datepicker>
+                            <button type="button" class="right" (click)="pickerConsc.open()">
+                                <fa-icon [icon]="['fas', 'calendar-week']"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End Fecha apertura -->
+                    <!-- Fecha vencimiento -->
+                    <div class="group bb-grid-h">
+                        <label for="fecha_vencimiento">Fecha vencimiento:</label>
+                        <div class="merged">
+                            <input type="text" class="uk-input" id="fecha_vencimiento" matInput [matDatepicker]="pickerConscs" name="fecha_vencimiento" formControlName="fecha_vencimiento" placeholder="aaaa/mm/dd" (dateChange)="addEvent('changeVen', $event)" autocomplete="off">
+                            <mat-datepicker [dateClass]="selectedDateClass" #pickerConscs></mat-datepicker>
+                            <button type="button" class="right" (click)="pickerConscs.open()">
+                                <fa-icon [icon]="['fas', 'calendar-week']"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- End Fecha vencimiento -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Base -->
+                    <div class="group bb-grid-h">
+                        <label for="base">Base:</label>
+                        <div>
+                            <select class="uk-select" id="base" name="base" formControlName="base" title="" (change)="serviceTermInDaysCdt()" required>
+                                <option value="" selected disabled hidden></option>
+                                <option *ngFor="let d of baseTypeList" [value]="d.tipBase" [innerText]="d.descBase">
+                                </option>
+                            </select>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Base -->
+                    <!-- Periodicidad -->
+                    <div class="group bb-grid-h">
+                        <label for="tipo_plazo">Tipo plazo:</label>
+                        <div>
+                            <select class="uk-select" id="tipo_plazo" name="tipo_plazo" formControlName="tipo_plazo" title="">
+                                <option value="" selected disabled hidden></option>
+                                <option *ngFor="let d of termTypeList" [value]="d.tipPlazo" [innerText]="d.descPlazo"
+                                    [selected]="rateTypeList[1].descTasa">
+                            </select>
+                        </div>
+                    </div>
+                    <!-- End Periodicidad -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Tipo plazo -->
+                    <div class="group bb-grid-h">
+                        <label for="periodicidad">Periodicidad:</label>
+                        <div>
+                            <select class="uk-select" id="periodicidad" name="periodicidad" formControlName="periodicidad" title="" required>
+                                <option value="" selected disabled hidden></option>
+                                <option *ngFor="let d of periodTypeList" [value]="d.tipPeriodicidad"
+                                    [innerText]="d.descPeriodicidad">
+                            </select>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Tipo plazo -->
+                    <!--Plazo -->
+                    <div class="group bb-grid-h">
+                        <label for="plazo">Plazo:</label>
+                        <input type="text" class="uk-input" id="plazo" name="plazo" mask="00999" formControlName="plazo">
+                        <div class="s-message error required">Ingrese un plazo válido.</div>
+                    </div>
+                    <!-- End Plazo -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Tipo tasa -->
+                    <div class="group bb-grid-h">
+                        <label for="tipo_tasa">Tipo tasa:</label>
+                        <div>
+                            <select class="uk-select" (change)="onChange($event.target.value)" id="tipo_tasa" name="tipo_tasa" formControlName="tipo_tasa" title="" required>
+                                <option value="" selected disabled hidden></option>
+                                <option *ngFor="let d of rateTypeList" [value]="d.tipTasa" [innerText]="d.descTasa">
+                            </select>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Tipo tasa -->
+                    <div class="group bb-grid-h">
+                        <!-- Tasa efectiva -->
+                        <label for="tasa_efectiva" *ngIf="opcionSeleccionada == 1">Tasa efectiva:</label>
+                        <input type="text" class="uk-input uk-text-center" id="tasa_efectiva" name="tasa_efectiva" formControlName="tasa_efectiva" mask="separator.4" separatorLimit="100" (input)="validatePercent('tasa_efectiva')" suffix="%" autocomplete="off" *ngIf="opcionSeleccionada == 1">
+                        <!-- End Tasa efectiva -->
+
+                        <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                            <!-- Signo -->
+                            <div>
+                                <label for="tipo_tasa" *ngIf="opcionSeleccionada >= 2">Signo:</label>
+                                <select *ngIf="opcionSeleccionada >= 2" class="uk-select" id="signo" name="signo" formControlName="signo" required>
+                                    <option value="" selected disabled hidden></option>
+                                    <option value="1">+</option>
+                                    <option value="2">-</option>
+                                </select>
+                            </div>
+                            <!-- End Signo -->
+                            <!-- Spread -->
+                            <div>
+                                <label *ngIf="opcionSeleccionada  >= 2" for="spread">Spread:</label>
+                                <input type="text" class="uk-input uk-text-center" id="spread" name="spread" formControlName="spread" mask="separator.4" separatorLimit="100" (input)="validatePercent('spread')" suffix="%" autocomplete="off" *ngIf="opcionSeleccionada >= 2">
+                            </div>
+                            <!-- End Spread -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Retencion -->
+                    <div class="group bb-grid-h">
+                        <label for="retencion">Porcentaje retención:</label>
+                        <input type="text" class="uk-input uk-text-center" id="retencion" name="retencion" formControlName="retencion" mask="separator.4" separatorLimit="100" (input)="validatePercent('retencion')" suffix="%" autocomplete="off" required>
+                    </div>
+                    <!-- End Retencion -->
+                    <div class="group bb-grid-h">
+                    </div>
+                </div>
+
+                <h4 *ngIf="returnLiqui" class="bb-form-title">Liquidación del CDT:</h4>
+
+                <div *ngIf="returnLiqui" class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Tasa Nominal -->
+                    <div class="group bb-grid-h">
+                        <label for="tasa_nominal">Tasa Nominal:</label>
+                        <input type="text" class="uk-input" id="tasa_nominal" name="tasa_nominal" formControlName="tasa_nominal" mask="separator.4" separatorLimit="100" suffix="%">
+                    </div>
+                    <!-- End Tasa Nominal -->
+                    <!-- Tasa Efectiva -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada > 1" for="tasa_efectiva_sim">Tasa Efectiva:</label>
+                        <label *ngIf="opcionSeleccionada == 1" for="capital">Capital:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="capital" name="capital" formControlName="capital" mask="separator.4" prefix="$" thousandSeparator=",">
+                        <input *ngIf="opcionSeleccionada > 1" type="text" class="uk-input" id="tasa_efectiva_sim" name="tasa_efectiva_sim" formControlName="tasa_efectiva_sim" mask="separator.4" separatorLimit="100" suffix="%">
+                    </div>
+                    <!-- End Tasa Efectiva -->
+                </div>
+
+                <div *ngIf="returnLiqui" class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Interes Bruto -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="interes_bruto">Interes Bruto:</label>
+                        <label *ngIf="opcionSeleccionada > 1" for="interes_bruto_periodo">Interes Bruto Periodo:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="interes_bruto" name="interes_bruto" formControlName="interes_bruto" mask="separator.4" prefix="$" thousandSeparator=",">
+                        <input *ngIf="opcionSeleccionada > 1" type="text" class="uk-input" id="interes_bruto_periodo" name="interes_bruto_periodo" formControlName="interes_bruto_periodo" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Interes Bruto -->
+                    <!-- Periodo -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="interes_bruto_periodo">Interes Bruto Periodo:</label>
+                        <label *ngIf="opcionSeleccionada > 1" for="interes_neto_periodo">Interes Neto Periodo:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="interes_bruto_periodo" name="interes_bruto_periodo" formControlName="interes_bruto_periodo" mask="separator.4" prefix="$" thousandSeparator=",">
+                        <input *ngIf="opcionSeleccionada > 1" type="text" class="uk-input" id="interes_neto_periodo" name="interes_neto_periodo" formControlName="interes_neto_periodo" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Periodo -->
+                </div>
+
+                <div *ngIf="returnLiqui" class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Interes Neto -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="interes_neto">Interes Neto:</label>
+                        <label *ngIf="opcionSeleccionada > 1" for="retencion_interes_periodo">Retención Intereses Periodo:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="interes_neto" name="interes_neto" formControlName="interes_neto" mask="separator.4" prefix="$" thousandSeparator=",">
+                        <input *ngIf="opcionSeleccionada > 1" type="text" class="uk-input" id="retencion_interes_periodo" name="retencion_interes_periodo" formControlName="retencion_interes_periodo" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Interes Neto -->
+                    <!-- Interes Neto Periodo -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="interes_neto_periodo">Interes Neto Periodo:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="interes_neto_periodo" name="interes_neto_periodo" formControlName="interes_neto_periodo" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Interes Neto Periodo -->
+                </div>
+
+                <div *ngIf="returnLiqui" class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Factor -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada > 1" for="factor">Factor:</label>
+                        <input *ngIf="opcionSeleccionada > 1" type="text" class="uk-input" id="factor" name="factor" formControlName="factor" thousandSeparator=",">
+                    </div>
+                    <!-- End Factor -->
+                    <div class="group bb-grid-h">
+                    </div>
+                </div>
+
+                <div *ngIf="returnLiqui" class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Retencion Interes -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="retencion_interes">Retención Intereses:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="retencion_interes" name="retencion_interes" formControlName="retencion_interes" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Retencion Interes -->
+                    <!-- Retencion Interes Periodo -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="retencion_interes_periodo">Retención Intereses Periodo:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="retencion_interes_periodo" name="retencion_interes_periodo" formControlName="retencion_interes_periodo" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Retencion Interes Periodo -->
+                </div>
+
+                <div *ngIf="returnLiqui && opcionSeleccionada == 1" class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Valor de Total a Pagar tasa Fija -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="total_pagar">Total a Pagar:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="total_pagar" name="total_pagar" formControlName="total_pagar" mask="separator.4" prefix="$" thousandSeparator=",">
+                    </div>
+                    <!-- End Valor de Total a Pagar tasa Fija -->
+                    <!-- Factor -->
+                    <div class="group bb-grid-h">
+                        <label *ngIf="opcionSeleccionada == 1" for="factor">Factor:</label>
+                        <input *ngIf="opcionSeleccionada == 1" type="text" class="uk-input" id="factor" name="factor" formControlName="factor" thousandSeparator=",">
+                    </div>
+                    <!-- End Factor -->
+                </div>
+
+                <!-- Actions -->
+                <div class="submit-group">
+                    <!-- Regresar  -->
+                    <button *ngIf="enableFactor" type="button" class="uk-button bb-b-149 uk-button-danger" (click)="processReturn()">
+                        <fa-icon [icon]="['fas', 'undo-alt']"></fa-icon>
+                        <span> Volver</span>
+                    </button>
+
+                    <!-- return -->
+                    <button *ngIf="returnLiqui" type="button" class="uk-button bb-b-149 uk-button-primary" (click)="editLiquidation()" [disabled]="!returnLiqui">
+                        <fa-icon [icon]="['fas', 'chevron-circle-left']"></fa-icon>
+                        Ajustar
+                    </button>
+
+                    <!-- submit -->
+                    <button type="submit" class="uk-button bb-b-149 uk-button-primary" [disabled]="!simulador.valid">
+                        <span>Liquidar</span>
+                    </button>
+
+                    <!-- Guardar  -->
+                    <button *ngIf="enableFactor" type="button" class="uk-button bb-b-149 uk-button-primary" (click)="confirmSend()" [disabled]="!updateData">
+                        <span>Guardar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

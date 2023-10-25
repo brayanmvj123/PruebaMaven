@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.11 
+Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+Generado el: 2019.10.29 a las 10:22:11 AM COT 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/customers/arrangement/service/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="tns:modCustNoveltyRequest">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.ModCustNoveltyRequest"/>
+    </bindings>
+    <bindings scd="tns:modCustNoveltyResponse">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.ModCustNoveltyResponse"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/customers/involvedparty/event/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="~tns:CustomerNoveltyModRq_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.CustomerNoveltyModRqType"/>
+    </bindings>
+    <bindings scd="~tns:CustomerNoveltyModRs_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.CustomerNoveltyModRsType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/ifx/base/v1/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="~tns:AdditionalStatus_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.AdditionalStatusType"/>
+    </bindings>
+    <bindings scd="~tns:PhoneNum_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.PhoneNumType"/>
+    </bindings>
+    <bindings scd="~tns:OtherIdentDoc_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.OtherIdentDocType"/>
+    </bindings>
+    <bindings scd="~tns:GeneralException_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.GeneralExceptionType"/>
+    </bindings>
+    <bindings scd="~tns:Status_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.StatusType"/>
+    </bindings>
+    <bindings scd="~tns:AsyncRsInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.AsyncRsInfoType"/>
+    </bindings>
+    <bindings scd="~tns:CommercialArea_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.CommercialAreaType"/>
+    </bindings>
+    <bindings scd="~tns:PersonClient_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.PersonClientType"/>
+    </bindings>
+    <bindings scd="~tns:PersonName_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.PersonNameType"/>
+    </bindings>
+    <bindings scd="~tns:ContactInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.ContactInfoType"/>
+    </bindings>
+    <bindings scd="~tns:PostAddr_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.PostAddrType"/>
+    </bindings>
+    <bindings scd="~tns:DriversLicense_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.DriversLicenseType"/>
+    </bindings>
+    <bindings scd="~tns:ResidencePlace_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.ResidencePlaceType"/>
+    </bindings>
+    <bindings scd="~tns:FinantialInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.FinantialInfoType"/>
+    </bindings>
+    <bindings scd="~tns:CurrencyAmount_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.CurrencyAmountType"/>
+    </bindings>
+    <bindings scd="~tns:DeathCertificateInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.DeathCertificateInfoType"/>
+    </bindings>
+    <bindings scd="~tns:SelRangeDt_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.SelRangeDtType"/>
+    </bindings>
+    <bindings scd="~tns:CompositeContactInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.CompositeContactInfoType"/>
+    </bindings>
+    <bindings scd="~tns:BaseEnvr_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.BaseEnvrType"/>
+    </bindings>
+    <bindings scd="~tns:IndustId_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.IndustIdType"/>
+    </bindings>
+    <bindings scd="~tns:RefInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.RefInfoType"/>
+    </bindings>
+    <bindings scd="~tns:SvcRs_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.SvcRsType"/>
+    </bindings>
+    <bindings scd="~tns:CustId_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.CustIdType"/>
+    </bindings>
+    <bindings scd="~tns:NetworkTrnInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.NetworkTrnInfoType"/>
+    </bindings>
+    <bindings scd="~tns:BankInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.BankInfoType"/>
+    </bindings>
+    <bindings scd="~tns:SvcRq_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.SvcRqType"/>
+    </bindings>
+    <bindings scd="~tns:OrgIdList_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.OrgIdListType"/>
+    </bindings>
+    <bindings scd="~tns:OrgId_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.OrgIdType"/>
+    </bindings>
+    <bindings scd="~tns:OrgClient_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.OrgClientType"/>
+    </bindings>
+    <bindings scd="~tns:GroupHeaderInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.GroupHeaderInfoType"/>
+    </bindings>
+    <bindings scd="~tns:Severity_Type">
+      <typesafeEnumClass ref="com.bdb.opalomcrm.soap.schemas.novedad.SeverityType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/customers/classification/v1/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="~tns:ResidentAgentInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.ResidentAgentInfoType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/ifx/base/v2/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="~tns:NetworkTrnInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.$$$garbage$$$0"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/ifx/base/v3/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="~tns:SvcRq_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.$$$garbage$$$1"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="urn://bancodebogota.com/ifx/lite/v1/">
+    <schemaBindings map="false">
+      <package name="com.bdb.opalomcrm.soap.schemas.novedad"/>
+    </schemaBindings>
+    <bindings scd="~tns:RefInfo_Type">
+      <class ref="com.bdb.opalomcrm.soap.schemas.novedad.$$$garbage$$$2"/>
+    </bindings>
+  </bindings>
+</bindings>
+

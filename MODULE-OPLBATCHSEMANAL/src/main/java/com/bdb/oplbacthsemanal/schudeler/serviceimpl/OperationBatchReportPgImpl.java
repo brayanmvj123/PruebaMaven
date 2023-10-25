@@ -1,0 +1,42 @@
+package com.bdb.oplbacthsemanal.schudeler.serviceimpl;
+
+import com.bdb.opaloshare.persistence.repository.RepositorySalPgSemanalDown;
+import com.bdb.oplbacthsemanal.mapper.MapperReportPg;
+import com.bdb.oplbacthsemanal.schudeler.services.OperationBatchReportPg;
+import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Objects;
+
+@Service
+@CommonsLog
+public class OperationBatchReportPgImpl implements OperationBatchReportPg {
+
+    @Autowired
+    private RepositorySalPgSemanalDown repositorySalPgSemanalDown;
+
+    @Autowired
+    private MapperReportPg mapperReportPg;
+
+    /**
+     * Se encarga de <i>almacenar</i> la data obtenida del cruce de información entre las tablas
+     * {@link com.bdb.opaloshare.persistence.entity.SalPgSemanalDownEntity} .
+     */
+    @Override
+    public void reportFechaVenOfic() throws Exception {
+        log.info("INICIO EL CRUCE DE INFORMACIÓN PARA LLENAR LA TABLA _SAL_PGSEMANAL");
+        try {
+            repositorySalPgSemanalDown
+                    .cruceReportFechaVenOfic()
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .forEach(item -> {
+                        repositorySalPgSemanalDown.save(mapperReportPg.toColumnsReportPgWeekly(item));
+                    });
+        } catch (Exception e) {
+            log.error("ERROR AL ALMACENAR LA INFORMACIÓN EN LA TABLA DE SALIDA...");
+            throw new Exception("ERROR AL ALMACENAR LA INFORMACIÓN EN LA TABLA DE SALIDA..." + e.getMessage());
+        }
+    }
+}

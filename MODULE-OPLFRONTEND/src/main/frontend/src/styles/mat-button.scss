@@ -1,0 +1,31 @@
+@import "theming";
+.mat-button-base {
+  border-radius: 20px !important;
+  transition: all 200ms;
+  &.mat-primary {
+    background-color: $bdb-color !important;
+    color: white;
+    &:disabled {
+      background-color: rgba($bdb-color, .1) !important;
+    }
+  }
+  &.mat-warn {
+    background-color: rgba($danger-color, .2);
+    color: $danger-color;
+  }
+  &.mat-accent {
+    background-color: #fff5e3 !important;
+    color: $bdb-orange-light;
+  }
+  &.big-creation {
+    width: 100%;
+    border-radius: 6px !important;
+  }
+}
+
+.bdb-dt-btn-danger {
+  color: rgba($danger-color, .9);
+  .mat-icon {
+    color: rgba($danger-color, .9);
+  }
+}

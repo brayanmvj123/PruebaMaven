@@ -1,0 +1,20 @@
+.uk-modal.bb-modal-loggedout {
+  background-color: rgba(black, .7);
+}
+
+.bb-login-box {
+  width: 300px;
+  padding: 1.5rem;
+  box-sizing: content-box;
+  border-radius: .5rem;
+  box-shadow: 0 0 15px rgba(#000, .09);
+
+  .bdb-logo {
+    text-align: center;
+    padding: 1rem;
+
+    img {
+      max-width: 213px;
+    }
+  }
+}

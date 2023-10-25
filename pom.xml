@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.9.RELEASE</version>
+    </parent>
+    <groupId>com.bdb.opalo</groupId>
+    <artifactId>OPALOBDB</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>OPALOBDB</name>
+    <description>Apertura , Modificacion y Cancelacion de CDTS Desmaterializados</description>
+
+    <modules>
+
+        <!-- Módulo de utilidades comunes entre modulos -->
+        <module>MODULE-OPLSHARE</module>
+
+        <!-- Sistema traductor contable - Apertura de Cdts Digitales Desmaterializados -->
+        <module>MODULE-OPLTRADUCTOR</module>
+
+        <!-- Microservicio de consulta de valores totales de los títulos enviados a construir a Deceval S.A. por
+        oficina y digitales -->
+        <module>MODULE-OPLCONSULTA</module>
+
+        <!-- Módulo de apertura de CDT -->
+        <module>MODULE-OPAPCDT</module>
+
+        <!-- Módulo de marcación en CRM -->
+        <module>MODULE-OPLMCRM</module>
+
+        <module>MODULE-OPLSSQLS</module>
+
+		<module>MODULE-OPLSIMULADOR</module>
+
+        <!-- Módulo de cofnal -->
+        <module>MODULE-OPLCOFNAL</module>
+
+        <module>MODULE-OPLCDECEVAL</module>
+
+        <module>MODULE-OPL-SERVFRONT</module>
+
+        <module>MODULE-OPL-AUTH</module>
+
+        <module>MODULE-OPLBATCH</module>
+		
+		<module>MODULE-OPLBATCHDIARIOS</module>
+		
+		<module>MODULE-OPLBATCHSEMANAL</module>
+
+        <module>MODULE-OPLBATCHMENSUAL</module>
+
+        <module>MODULE-OPLBATCHANUAL</module>
+
+        <module>MODULE-OPLBATCHOCASIONAL</module>
+
+        <module>MODULE-OPLEMAIL</module>
+
+        <module>MODULE-OPLCONTROL</module>
+
+        <module>MODULE-OPLMDS</module>
+
+        <module>MODULE-OPLFRONTEND</module>
+
+        <module>MODULE-OPLOFICINA</module>
+
+        <module>MODULE-OPLPAGOSAUT</module>
+
+        <module>MODULE-OPLCANCELACIONES</module>
+
+        <module>MODULE-OPLDEBITO</module>
+
+        <module>MODULE-OPLREPORTE</module>
+    </modules>
+
+</project>

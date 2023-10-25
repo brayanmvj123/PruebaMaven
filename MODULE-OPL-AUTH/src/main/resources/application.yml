@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    description: @project.description@
+
+bancodebogota:
+  wsdl: 2
+  auth_type_env: AUTH_TYPE_PROCESS
+  auth_permanent_env: AUTH_PERMANENT_USER_ROLE
+  auth_domains_env: AUTH_DOMAIN_LIST
+
+session:
+  token:
+    durationInMinutes: 10

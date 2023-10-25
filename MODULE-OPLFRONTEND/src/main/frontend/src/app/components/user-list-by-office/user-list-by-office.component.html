@@ -1,0 +1,119 @@
+<section class="users uk-animation-slide-bottom-medium">
+
+    <!-- title  -->
+    <div class="breadcrumb">
+        <h1>Lista de oficinas/usuarios</h1>
+        <div>
+            Administración de usuarios por oficina seleccionada
+        </div>
+        <div class="uk-position-absolute new-reg">
+            <button type="button" (click)="regUser()" mat-raised-button color="primary">
+                Nuevo registro
+            </button>
+        </div>
+    </div>
+    <div class="breadcrumb-separator"></div>
+    <!-- End title  -->
+
+    <div class="bdb-dt-loading uk-animation-slide-top-small" *ngIf="loading">
+        <div uk-spinner="ratio: 1"></div>
+        <div class="uk-margin-small-top">Cargando datos...</div>
+    </div>
+
+    <div class="card uk-animation-slide-bottom-medium" *ngIf="!loading && dataSource.length === 0">
+        <div class="card-body">
+            <h3>No hay datos disponibles de usuarios en la oficina seleccionada...</h3>
+        </div>
+    </div>
+
+    <div [hidden]="determ!=true">
+
+        <div class="card uk-animation-slide-bottom-medium">
+            <div class="card-body">
+                <div class="controls uk-margin-small-bottom">
+
+                    <!-- Filtrar-->
+                    <div class="search">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="controls uk-margin-small-bottom">
+                        <div class="num-per-page">
+                            <div [(ngModel)]="uPerPage" (change)="changeIPP()" [disabled]="dataSourcePag.length < 5">
+                            </div>
+                        </div>
+                        <div class="report"></div>
+                    </div>
+                </div>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSourcePag" multiTemplateDataRows *ngIf="!loading && dataSource.length > 0" class="dbd-dt-elevation uk-animation-slide-bottom-medium">
+
+                        <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+                            <th mat-header-cell *matHeaderCellDef [innerText]="setColumnName(column)"></th>
+                            <td mat-cell *matCellDef="let element">
+
+                                <div [ngSwitch]="column" class="textSizeBody">
+
+                                    <!-- Elemento que contiene las acciones sobre los registros -->
+                                    <div *ngSwitchCase="'action'" class="uk-text-right">
+                                        <button mat-icon-button aria-label="Menu" [matMenuTriggerFor]="menu">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+
+                                            <button (click)="goToItem(element)" mat-menu-item>
+                                                <mat-icon class="color-icon-get">policy</mat-icon>
+                                                <span>Consultar</span>
+                                            </button>
+
+                                            <button (click)="modifyItem(element)" mat-menu-item>
+                                                <mat-icon class="color-icon-update">create</mat-icon>
+                                                <span>Actualizar</span>
+                                            </button>
+
+                                            <button (click)="deleteUser(element)" mat-menu-item>
+                                                <mat-icon class="color-icon-delete">delete</mat-icon>
+                                                <span>Eliminar</span>
+                                            </button>
+
+                                        </mat-menu>
+                                    </div>
+
+                                    <div *ngSwitchDefault [innerText]="element[column]"></div>
+                                </div>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expandedDetail">
+                            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                                <div class="bdb-dt-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="bdb-dt-element-row" [class.bdb-dt-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="bdb-dt-detail-row"></tr>
+                    </table>
+                    <div class="container center-h center-v">
+                        <mat-paginator [pageSize]=5 [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+                    </div>
+                </div>
+
+                <div class="uk-margin-medium-top uk-flex">
+                    <div class="flex-grow">
+                        <button type="button" mat-raised-button color="warn" (click)="processReturn()">
+                            <fa-icon [icon]="['fas', 'undo-alt']"></fa-icon>
+                            Volver
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>

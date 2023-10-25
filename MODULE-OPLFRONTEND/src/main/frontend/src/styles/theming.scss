@@ -1,0 +1,62 @@
+/**
+ * Copyright (c) 2020 Banco de Bogotá. All Rights Reserved.
+ * <p>
+ * ACCIONESBF-FRONT was developed by Team Deceval BDB
+ * <p>
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * proprietary and confidential. For use this code you need to contact to
+ * Banco de Bogotá and request exclusive use permission.
+ * <p>
+ * This file was write by Jose Buelvas <jbuelva@bancodebogota.com.co>.
+ */
+
+
+/** DIMENSIONS ====================================================================================================== */
+
+$header-height: 80px;
+$form-inset-width: 500px;
+
+/** COLORS ========================================================================================================== */
+
+$danger-color: #ff1627;
+$success-color: #1ea75d;
+$light-gray-1: #f7f7f7;
+$light-gray-2: #eaeaea;
+$text-color-dark-1: #000;
+$text-color-dark-2: #292929;
+$text-color-dark-main: #292929;
+$bdb-color: #0f44a2;
+$bdb-color-light: #124fbd;
+$bdb-color-light-2: #1667ff;
+$bdb-color-dark: #0051a6;
+$bdb-color-dark-2: rgba(15, 68, 162, 1);
+$bdb-orange: #f69b31;
+$bdb-orange-dark: #df8d2c;
+$bdb-orange-light: #fdc130;
+$bdb-orange-light-2: #ffcf51;
+$header-bg: #fff;
+$a-side-link: #a4a6a8;
+$a-side-link-light: #bcbec0;
+$side-scrollbar: #bcbec0;
+$side-bg: #fff;
+$a-side-link-light-2: #f8f9fa;
+$a-sub-bg-aside: #f1f1f1;
+$description-color: #70657b;
+$card-bg: #fff;
+$card-lb-home: #FC7A7A;
+$placeholder-color: #8e8e8e;
+
+/** IMAGES ========================================================================================================== */
+$image-checked: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Ccircle%20fill%3D%22%23fff%22%20cx%3D%228%22%20cy%3D%228%22%20r%3D%222%22%20%2F%3E%0A%3C%2Fsvg%3E");
+
+/** METHODS ========================================================================================================= */
+%form-inset {
+  width: $form-inset-width;
+  margin: 4rem auto 2rem;
+}
+
+@each $val in (10, 20, 30, 40, 50) {
+  .line-height-#{$val} {
+    line-height: #{$val}px;
+  }
+}

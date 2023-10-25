@@ -1,0 +1,6 @@
+@import "src/theming";
+
+.user-connection,
+.user-creation {
+  @extend %form-inset;
+}

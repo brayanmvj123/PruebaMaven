@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    description: @project.description@
+  mail:
+    host: 10.86.82.198
+    port: 25
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 100000
+          timeout: 100000
+          writetimeout: 100000

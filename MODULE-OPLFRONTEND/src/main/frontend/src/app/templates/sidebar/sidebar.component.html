@@ -1,0 +1,78 @@
+<div class="side-content">
+    <div class="platform-brand uk-animation-slide-left-medium">
+      <div class="bn-logo">
+        <img src="./assets/img/logo-bogota-blanco.png" alt="bdb">
+      </div>
+      <div class="name">Opalo Desmaterializado</div>
+      <!-- <div class="description">
+        Panel de administración de accionistas
+      </div> -->
+    </div>
+  
+    <div class="menu-content uk-animation-slide-left-medium">
+      <ul uk-nav>
+        <ng-container *ngFor="let item of sidebar._main">
+          <li [ngClass]="{'bb-navs uk-parent': item.submenu.length > 0}" *ngIf="showView(item.id)">
+            <a [routerLink]="item.routerLink" [routerLinkActive]="'menu-active'" (click)="wck()">
+              <span class="ibg"><fa-icon [icon]="item.icon"></fa-icon></span>
+              <span [innerText]="item.title"></span>
+              <span class="chevron" *ngIf="item.submenu.length > 0">
+                <fa-icon [icon]="['fas', 'angle-left']"></fa-icon>
+              </span>
+            </a>
+            <ul class="uk-nav-sub sub-nav" *ngIf="item.submenu.length > 0">
+              <ng-container *ngFor="let sub of item.submenu">
+                <li *ngIf="showView(sub.id)">
+                  <a [routerLink]="sub.routerLink" [routerLinkActive]="'sub-menu-active'" (click)="wck()">
+                    <span class="sub-icon">
+                      <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </span>
+                    {{sub.title}}
+                  </a>
+                </li>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+        <li class="label" *ngIf="sidebar._admin.length > 0"></li>
+        <ng-container *ngFor="let item of sidebar._admin">
+          <li [ngClass]="{'bb-navs uk-parent': subEnabled(item.submenu)}"
+              *ngIf="showView(item.id)"
+              [routerLinkActive]="'big-active'">
+            <a *ngIf="item.routerLink === null" (click)="wck(false)">
+              <span class="ibg"><fa-icon [icon]="item.icon"></fa-icon></span>
+              <span [innerText]="item.title"></span>
+  
+              <span class="chevron" *ngIf="subEnabled(item.submenu)">
+                <fa-icon [icon]="['fas', 'angle-left']"></fa-icon>
+              </span>
+            </a>
+            <a [routerLink]="item.routerLink"
+               [routerLinkActive]="'menu-active'"
+               (click)="wck()"
+               *ngIf="item.routerLink !== null">
+              <span class="ibg"><fa-icon [icon]="item.icon"></fa-icon></span>
+              <span [innerText]="item.title"></span>
+  
+              <span class="chevron" *ngIf="subEnabled(item.submenu)">
+                <fa-icon [icon]="['fas', 'angle-left']"></fa-icon>
+              </span>
+            </a>
+            <ul class="uk-nav-sub sub-nav" *ngIf="subEnabled(item.submenu)">
+              <ng-container *ngFor="let sub of item.submenu">
+                <li *ngIf="showView(sub.id)">
+                  <a [routerLink]="sub.routerLink" [routerLinkActive]="'sub-menu-active'" (click)="wck()">
+                    <span class="sub-icon">
+                      <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </span>
+                    {{sub.title}}
+                  </a>
+                </li>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+  

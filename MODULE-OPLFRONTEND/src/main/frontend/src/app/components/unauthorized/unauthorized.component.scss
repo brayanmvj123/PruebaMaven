@@ -1,0 +1,19 @@
+.unauthorized {
+  background-color: #fefefe;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .intro {
+    padding: 1rem;
+
+    .icon {
+      font-size: 50px;
+    }
+
+    .bb-text {
+      font-size: 16px;
+    }
+  }
+}

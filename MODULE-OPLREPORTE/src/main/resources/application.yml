@@ -1,0 +1,16 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    description: @project.description@
+springdoc:
+  swagger-ui:
+    path: /my-api-docs
+    operationsSorter: method
+    enabled: true
+    cors: true
+  api-docs:
+    path: /api-docs

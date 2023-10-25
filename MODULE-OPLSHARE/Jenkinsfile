@@ -1,0 +1,112 @@
+
+def  POM_VERSION = ""
+def  ARTEFACTO_VERSION
+def pom
+def car
+def  version
+
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '',
+            artifactNumToKeepStr: '',
+            daysToKeepStr: '', 
+            numToKeepStr: '10')), 
+            disableConcurrentBuilds(),
+            parameters([string(defaultValue: '', description: 'Rama a desplegar',  name: 'BRANCH_NAME', trim: false),
+			string(defaultValue: '', description: 'Nombre microservicio',  name: 'MODULOOPALO', trim: false)
+			])])
+
+node {
+        try {
+        
+		// ****** stage para hacer checkout de la rama DEV y traer los cambios ******
+		stage('checkout'){
+						checkout([$class: 'GitSCM', branches: [[name: BRANCH_NAME]],
+						doGenerateSubmoduleConfigurations: false, 
+						extensions: [], submoduleCfg: [], 
+						userRemoteConfigs: [[credentialsId: '4a06b86b-f83e-4d79-a6c1-0d08f44c8a10',
+						url: 'https://github.com/bdb-dns/OPALOBDB.git']]])
+					
+						}
+
+		// ****** stage para la construccion del modulo OPLSIMULADOR y OPLSHARE. Obtencion de version del pom ******				
+        stage('Maven')
+		{
+			bat label: 'maven', script: 'mvn -pl MODULE-OPLSHARE,'+MODULOOPALO+' -am clean package -DskipTests=true -Dspring.backgroundpreinitializer.ignore=true -Pqa'
+			
+			dir(MODULOOPALO)
+		    {
+                 def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
+                matcher ? matcher[1][0]:null
+		 		def aster = matcher.toString()
+                delimitar = aster.split('=')
+                 version = delimitar[3].replaceAll("<version>","")
+                version = version.replaceAll("</version>]","")
+		    	println version
+         	}
+        }
+
+		// ****** stage para despliegue del war generado ******				
+        stage('UCD')
+		{
+            if (BRANCH_NAME== "DEV")
+		{
+		    AMBIENTE="OPALO_DESA"
+		    echo AMBIENTE
+		}
+		else if(BRANCH_NAME== "TEST")
+		{
+		    AMBIENTE="OPALO_PRUE"
+		    echo AMBIENTE
+		}
+		else if(BRANCH_NAME== "master")
+		{
+		    AMBIENTE="OPALO_PROD"
+		    echo AMBIENTE
+		}
+		step([$class: 'UCDeployPublisher',
+           component: [componentName: 'COM_OPALO_'+MODULOOPALO, 
+           componentTag: '',
+           delivery: [$class: 'Push',
+           baseDir: env.WORKSPACE+'\\'+MODULOOPALO+'\\target', 
+           fileExcludePatterns: '',
+           fileIncludePatterns: '*.war', 
+           pushDescription: 'Creada por jenkins'+ version,
+           pushIncremental: false, pushProperties: '',
+           pushVersion: version]],
+           deploy: [deployApp: 'OPALO',
+           deployDesc: 'Requested from Jenkins' + version, 
+           deployEnv: AMBIENTE, 
+           deployOnlyChanged: true,
+           deployProc: 'Despliegue Opalo',
+           deployReqProps: '',
+           deployVersions: 'COM_OPALO_'+MODULOOPALO+':'+version,
+           skipWait: false], siteName: 'UCDQA'])
+		}
+		
+		// ****** stage para envio de notificacion. es el mismo correo, cambia el log segun sea exitoso o error ******
+		stage ('Email')
+		{
+			emailext attachLog: true,
+			body:  '''<strong>$DEFAULT_CONTENT <br></strong> 
+            <br><br>''', 
+            subject:  '$DEFAULT_SUBJECT' + " BRANCH " + BRANCH_NAME,
+            to: 'jchinch@bancodebogota.com.co, jvarel3@bancodebogota.com.co, crodr35@bancodebogota.com.co, DGARZON2@bancodebogota.com.co,JRIVE16@bancodebogota.com.co,ABARRE4@bancodebogota.com.co, JBUELVA@bancodebogota.com.co,JBENIT6@bancodebogota.com.co, ETALERO@bancodebogota.com.co , JGORDI1@bancodebogota.com.co'
+				 deleteDir()
+		}
+           
+		}catch (e)
+		{
+        e.printStackTrace()
+        println e
+        currentBuild.result = "FAILURE"
+			stage ('EmailError')
+		{
+			emailext attachLog: true,
+			body:  '''<strong>$DEFAULT_CONTENT <br></strong> 
+            <br><br>''', 
+            subject:  '$DEFAULT_SUBJECT' + " BRANCH " + BRANCH_NAME,
+            to: 'jchinch@bancodebogota.com.co, jvarel3@bancodebogota.com.co, crodr35@bancodebogota.com.co, DGARZON2@bancodebogota.com.co,JRIVE16@bancodebogota.com.co,ABARRE4@bancodebogota.com.co, JBUELVA@bancodebogota.com.co,JBENIT6@bancodebogota.com.co, ETALERO@bancodebogota.com.co , JGORDI1@bancodebogota.com.co'
+			 deleteDir()
+		}
+		}
+}
+

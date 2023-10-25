@@ -1,0 +1,192 @@
+<section class="users uk-animation-slide-bottom-medium">
+
+    <!-- title heading -->
+    <div class="breadcrumb">
+        <h1>Usuarios</h1>
+        <div>Panel de administración de usuarios de la plataforma</div>
+
+    </div>
+    <div class="breadcrumb-separator"></div>
+    <!-- end title heading -->
+
+    <div class="uk-position-relative">
+        <!-- loading -->
+        <div class="bb-page-loading uk-animation-fade" *ngIf="loading && this.nuser !== ''">
+            <div class="uk-animation-slide-left-medium">
+                <div uk-spinner></div>
+                <div>Buscando usuario de red {{nuser}}<span>.</span><span>.</span><span>.</span></div>
+            </div>
+        </div>
+        <!-- end loading -->
+
+        <!-- error -->
+        <div class="bb-alert uk-alert-danger uk-animation-slide-top-small" *ngIf="hasError" uk-alert>
+            <!-- <a class="uk-alert-close" (click)="hasError = false" uk-close></a> -->
+            <p>
+                <fa-icon [icon]="['fas', 'exclamation-triangle']"></fa-icon>
+                <span [innerText]="errorMessage"></span>
+            </p>
+        </div>
+        <!-- end error -->
+
+        <!-- no users -->
+        <div class="bb-alert uk-alert-primary uk-animation-slide-top-small"
+            *ngIf="firstSearched && nUsers.length === 0 && !loading && searched" uk-alert>
+            <!-- <a class="uk-alert-close" uk-close></a> -->
+            <p>
+                <fa-icon [icon]="['fas', 'exclamation-triangle']"></fa-icon>
+                <span class="line-height-30">No se encontró el usuario de red "{{prevSearch}}".</span>
+            </p>
+        </div>
+        <!-- end no users -->
+
+    </div>
+
+    <!-- show user list -->
+    <div class="card uk-animation-slide-bottom-medium" [class.reposition]="!firstSearched"
+        *ngIf="nUsers.length === 0 && !loading && !searched">
+        <div class="card-body">
+
+            <div class="controls uk-margin-small-bottom">
+                <div class="num-per-page">
+                    <select class="uk-select bb-control" [(ngModel)]="uPerPage" (change)="changeIPP()"
+                        title="Usuarios por página" [disabled]="dataUsers.length <= 5">
+                        <option *ngFor="let i of [5, 10, 15, 20, 50, 100]" [value]="i">{{i}} usuarios por página
+                        </option>
+                    </select>
+                </div>
+                <div class="report">
+                    <button class="uk-button uk-button-small uk-button-success rb" (click)="openPasswordDialog()">
+                        <span class="irb">
+                            <fa-icon [icon]="['fas', 'file-excel']"></fa-icon>
+                        </span>
+                        <span>Exportar</span>
+                    </button>
+                    <a class="download-zip-link" #downloadXlsxLink></a>
+                </div>
+            </div>
+
+            <bdb-datatable [itemIcon]="['fas', 'user']" [data]="dataUsers" [useRowModal]="true"
+                [options]="userListOptions" [itemsPerPage]="userPerPage" [headers]="allUsersHeaders"
+                [loadingData]="tableLoading" [useModal]="true" (selectedItem)="changeUserSelection($event)">
+                <div modalContent>
+                    <div class="bb-detail" uk-grid>
+                        <div class="uk-width-auto@m">
+                            <div class="icon-content">
+                                <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                            </div>
+                        </div>
+                        <div class="uk-width-expand@m">
+                            <div class="group">
+                                <label>Nombre:</label>
+                                <input type="text" class="popuptext" name="nombreusu" id="nombreusu" disabled>
+                            </div>
+                            <div class="group">
+                                <label>Identificación:</label>
+                                <input type="text" class="popuptext" name="identificacion" id="identificacion" disabled>
+                            </div>
+                            <div class="group">
+                                <label>Usuario de red:</label>
+                                <input type="text" class="popuptext" name="usuario" id="usuario" disabled>
+                            </div>
+                            <div class="group">
+                                <label>Fecha de última conexión:</label>
+                                <input type="text" class="popuptext" name="fechacon" id="fechacon" disabled>
+                            </div>
+                            <div class="group">
+                                <label>Estado:</label>
+                                <input type="text" class="popuptext" name="estado" id="estado" disabled>
+                            </div>
+                            <div id="roleGroup" class="group target">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </bdb-datatable>
+        </div>
+    </div>
+    <!-- end show user list -->
+
+    <!-- user result -->
+    <div class="card uk-animation-slide-bottom-small" *ngIf="nUsers.length > 0 && !loading">
+        <div class="card-body">
+            <table class="uk-table uk-table-hover uk-table-middle uk-table-divider bb-users">
+                <thead>
+                    <tr>
+                        <th class="uk-table-shrink"></th>
+                        <th class="">Nombre</th>
+                        <th class="">Usuario de red</th>
+                        <th class="">Última conexión</th>
+                        <th class="uk-table-shrink uk-text-nowrap">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let u of nUsers">
+                        <td>
+                            <div class="user-icon">
+                                <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                            </div>
+                        </td>
+                        <td [innerText]="u.nombres + ' ' + u.apellidos"></td>
+                        <td [innerText]="u.usuario"></td>
+                        <td [innerText]="u.fecha_conexion | date: 'dd/MM/yyyy HH:mm'"></td>
+                        <td class="uk-text-nowrap">
+                            <swal #disableUser title="¿Seguro que quieres deshabilitar a {{u.nombres}}?"
+                                text="Esta acción le impedirá al usuario ingresar a la plataforma o ejecutar cualquier acción en ella."
+                                icon="warning" [showCancelButton]="true" [focusCancel]="true"
+                                (confirm)="doDisableUser(u)" confirmButtonText="Sí" cancelButtonText="No"></swal>
+                            <swal #enableUser title="¿Seguro que quieres habilitar a {{u.nombres}}?"
+                                text="Esta acción le permitirá al usuario ingresar a la plataforma y ejecutar las acciones que concuerden sus correspondientes roles."
+                                icon="question" [showCancelButton]="true" [focusCancel]="true"
+                                (confirm)="doEnableUser(u)" [showLoaderOnConfirm]="false" confirmButtonText="Sí"
+                                cancelButtonText="No"></swal>
+                            <swal #notAllowed title="No puedes deshabilitarte!"
+                                text="Si llegaras a deshabilitarte a ti mismo, ya no podrías volver a habilitarte."
+                                icon="error" confirmButtonText="Comprendo"></swal>
+                            <swal #notAllowedPermanent title="No puedes deshabilitar a un usuario permanente!"
+                                text="Los usuarios permanentes no pueden ser deshabilitados." icon="error"
+                                confirmButtonText="Comprendo"></swal>
+                            <label class="form-switch" [class.disabled]="u.usuario === userData.username"
+                                [swal]="validateModal(u, {enableUser: enableUser, disableUser: disableUser, notAllowed: notAllowed, notAllowedPermanent: notAllowedPermanent})"
+                                [attr.uk-tooltip]="u.estado !== '2' ? 'Activo' : 'Inactivo'">
+                                <input type="checkbox" name="status" [disabled]="u.usuario === userData.username"
+                                    [checked]="u.estado !== '2'">
+                                <i class="disabling"></i>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card -->
+
+</section>
+
+<div class="uk-flex-top bb-modal-password-main" id="password-modal" uk-modal>
+    <div
+        class="uk-modal-dialog uk-modal-body uk-animation-slide-bottom-medium bb-modal-password uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h4>Contraseña para archivo de Excel</h4>
+        <div class="password-input">
+            <div class="input-merged">
+                <input type="{{eyeOpened ? 'text' : 'password'}}" class="uk-input" [(ngModel)]="filePassword"
+                    placeholder="Contraseña" title="Contraseña">
+                <button type="button" class="right" (mousedown)="eye()" (mouseup)="eye()">
+                    <fa-icon [icon]="['fas', eyeOpened ? 'eye' : 'eye-slash']"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <div class="password-button uk-margin-small-top uk-text-center">
+            <button class="uk-button uk-button-success" [disabled]="filePassword === ''" (click)="downloadExcel()">
+                <span *ngIf="tableLoading">
+                    <div uk-spinner="ratio: .9"></div>
+                </span>
+                <span *ngIf="!tableLoading">
+                    <fa-icon [icon]="['fas', 'download']"></fa-icon>
+                    Descargar archivo Excel
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

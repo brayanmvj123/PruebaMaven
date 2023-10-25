@@ -1,0 +1,25 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+<div *ngIf="enableConfirm">
+    <div class=" uk-animation-slide-bottom-medium">
+
+        <h3 class="bb-title uk-text-center"> Se realizó la liquidación - conciliación y se presentaron diferencias.</h3>
+        <h4 class="bb-title uk-text-center"> Elija entre el factor Opalo ó Deceval.</h4>
+
+        <div class="uk-margin-medium-top uk-flex">
+            <div class="flex-grow uk-text-center">
+                <button type="button" mat-raised-button color="accent" (click)="simular(1)">
+                    OPALO
+                </button>
+            </div>
+            <div class="flex-grow uk-text-center">
+                <button type="button" mat-raised-button color="primary" (click)="simular(2)">
+                    DECEVAL
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

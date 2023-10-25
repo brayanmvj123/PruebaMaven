@@ -1,0 +1,52 @@
+@import "src/theming";
+.bb-users {
+    margin: 0;
+}
+
+// User icon in result search
+.user-icon {
+    width: 30px;
+    height: 30px;
+    background-color: $a-sub-bg-aside;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reposition {
+    margin-top: 1rem;
+}
+
+// Excel Password modal
+.bb-modal-password {
+    width: 400px;
+    border-radius: 5px;
+    h4 {
+        font-size: 18px;
+        font-style: italic;
+    }
+}
+
+.botton-external {
+    float: right;
+    padding-top: 20px;
+}
+
+.container {
+    display: flex;
+    /* align-items por defecto tiene el valor `stretch` */
+    align-items: flex-start;
+}
+
+.center-h {
+    justify-content: center;
+}
+
+.center-v {
+    align-items: center;
+}
+
+.textSizeBody {
+    font-size: 0.75rem;
+}

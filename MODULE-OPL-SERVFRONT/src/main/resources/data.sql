@@ -1,0 +1,16 @@
+drop table if exists TABLA_TEST;
+
+ CREATE TABLE TABLA_TEST
+   (	"COD_RUTA" NUMBER(20) ,
+	"DESC_RUTA" VARCHAR2(20) );
+
+
+
+
+    insert into TABLA_TEST(COD_RUTA,DESC_RUTA) values (1,'ruta de BD');
+
+    ------
+
+     CREATE TABLE ACC_PAR_TIPUVT_DOWN_TBL
+   (	"YEAR_UVT" NUMBER(4,0) NOT NULL ENABLE,
+	"VAL_UVT" NUMBER(16,4) NOT NULL ENABLE,

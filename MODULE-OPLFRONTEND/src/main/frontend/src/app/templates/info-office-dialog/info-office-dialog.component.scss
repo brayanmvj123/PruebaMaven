@@ -1,0 +1,67 @@
+@import "src/theming";
+
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+  color: darkgrey;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-52px;
+  right:-52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset
+}
+
+.popuptext {
+  border: 0;
+  background-color: white;
+  size: 5;
+  width: 100px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+}
+
+.blue-icon {
+  color: blue;
+  font-size: 30px;
+}
+
+label {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.div__simular{
+  text-align: center;
+}
+
+.button__simular{
+  background-color: #fff5e3;
+  color: #fdc130;
+  width: 100px;
+}
+
+.button__ajustar{
+  background-color: #0f44a2;
+  color: white;
+  width: 100px;
+  margin-left: 15px;
+}
+
+.widthModal{
+  width: 40%;
+}

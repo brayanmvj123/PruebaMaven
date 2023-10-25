@@ -1,0 +1,78 @@
+<section class="login-content uk-animation-fade uk-animation-slide-top-medium">
+
+    <div class="bdb-login">
+
+        <!-- logo -->
+        <div class="bdb-logo">
+            <img src="./assets/img/bdb_logo.svg" alt="Banco de Bogotá">
+        </div>
+
+        <div class="bdb-welcome">
+            <div class="bdb-title-small">Bienvenido a</div>
+            <div class="bdb-title">Opalo Desmaterializado</div>
+        </div>
+
+        <div class="uk-alert-danger bb-alert-no-top" *ngIf="loginError" uk-alert>
+            <a class="uk-alert-close" (click)="whenClose()" uk-close></a>
+            <div>
+              <span [textContent]="errorMessage"></span>
+              <div class="more-details" *ngIf="unAuth">
+                <button mat-stroked-button (click)="showUnAuth()">¿Necesitas ayuda para ingresar a la plataforma?</button>
+              </div>
+            </div>
+        </div>
+        
+        <div class="login-container">
+
+            <!-- login form -->
+            <form #loginElement [formGroup]="loginForm" class="login-form" method="post" (ngSubmit)="submitForm()" novalidate>
+
+                <div class="login-t">Ingresa con tu cuenta de usuario</div>
+
+                <!-- username -->
+                <div class="group">
+                    <input #loginUsername type="text" class="uk-input" id="username" (click)="getCapsOnReady($event)" name="username" formControlName="username" placeholder="Nombre de usuario" autocomplete="off" title="" required>
+                    <div class="cmessage error" [hidden]="!showError('username', 'invalid')">Este campo es requerido.
+                    </div>
+                </div>
+
+                <!-- password -->
+                <div class="group" (bdbCapsLock)="capsLock=$event">
+                    <div class="merged">
+                        <input type="{{eyeOpened ? 'text' : 'password'}}" class="uk-input" id="password" name="password" formControlName="password" placeholder="Contraseña" title="" required>
+                        <button type="button" class="right-l" (mousedown)="eye()" (mouseup)="eye()">
+              <fa-icon [icon]="['fas', eyeOpened ? 'eye' : 'eye-slash']"></fa-icon>
+            </button>
+                    </div>
+                    <div class="caps-lock" *ngIf="capsLock">Bloq mayús Activado</div>
+                    <div class="cmessage error" [hidden]="!showError('password', 'invalid')">Este campo es requerido.</div>
+                </div>
+
+                <!-- domain -->
+                <div class="group">
+                    <select class="uk-select" id="domain" name="domain" formControlName="domain" title="" required>
+            <option value="" selected disabled hidden>Dominio</option>
+            <option *ngFor="let d of domainList | keyvalue" [value]="d.key" [innerText]="d.value"></option>
+          </select>
+                    <div class="cmessage error" [hidden]="!showError('domain', 'invalid')">Este campo es requerido.
+                    </div>
+                </div>
+
+                <!-- submit -->
+                <div class="submit-group">
+                    <button type="submit" class="uk-button uk-button-primary" [disabled]="loginForm.invalid || loading">
+            <span *ngIf="!loading">Ingresar ahora</span>
+            <div *ngIf="loading" uk-spinner="ratio: 1"></div>
+          </button>
+                </div>
+
+            </form>
+            <!-- end login form -->
+        </div>
+
+        <div class="uk-alert-warning uk-margin-small-top uk-animation-slide-bottom-medium" *ngIf="authType === 203" uk-alert>
+            <p>La autenticación está configurada en modo local.</p>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,63 @@
+<div class="bdb-datatable">
+  <div class="uk-position-relative">
+    <div class="bb-dt-loading" *ngIf="loadingData">
+      <div uk-spinner="ratio: 1"></div>
+    </div>
+    <div class="uk-overflow-auto">
+    <table class="uk-table uk-table-striped bdb-datatable-scroll" [ngClass]="class">
+      <thead>
+      <tr>
+        <th class="uk-table-shrink" style="width: 40px" *ngIf="showIcon"></th>
+        <th *ngFor="let h of headers; let $index = index"
+            [hidden]="headers[$index].type === 'hidden'"
+            (click)="orderExpression($index)"
+            [class.bb-active]="active(sort, $index)">
+          <span [innerText]="h.title"></span>
+          <span class="ttable-icon">
+            <fa-icon [icon]="['fas', asc && active(sort, $index) ? 'angle-up' : 'angle-down']"></fa-icon>
+          </span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of items | orderBy: sort : asc : true | paginate: config; let $index = index"
+          [class.item-selectable]="doingAction"
+          (click)="doAction($index, row)">
+        <td class="bb-icon-td" *ngIf="showIcon">
+          <div class="user-icon">
+            <fa-icon [icon]="icon"></fa-icon>
+          </div>
+        </td>
+        <td *ngFor="let item of row | keyvalue; let $index = index" [ngSwitch]="headers[$index].type" [hidden]="headers[$index].type === 'hidden'">
+          <div *ngSwitchCase="'text'">
+            <span [innerText]="item.value"></span>
+          </div>
+          <div *ngSwitchCase="'date'">
+            <span [innerText]="item.value | date: options.date_format"></span>
+          </div>
+          <div *ngSwitchCase="'status'" class="uk-text-right">
+            <div class="status_item"
+                 [ngStyle]="{'background-color': validateStatus(item.value)}"
+                 [innerText]="validateStatus(item.value, 'name')"></div>
+          </div>
+          <div *ngSwitchCase="'currency'" [innerText]="item.value | currency"></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <pagination-controls
+    [responsive]="true"
+    [nextLabel]="'Siguiente'"
+    [previousLabel]="'Anterior'"
+    (pageChange)="changeThePage($event)"></pagination-controls>
+</div>
+
+<div class="uk-flex-top bb-modal-loggedout" id="datatable-modal" uk-modal>
+  <div
+    class="uk-modal-dialog uk-modal-body uk-animation-slide-bottom-medium bb-modal-datatable uk-margin-auto-vertical">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <ng-content select="[modalContent]"></ng-content>
+  </div>
+</div>

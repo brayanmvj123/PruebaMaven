@@ -1,0 +1,492 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.6hudson-86  svn-revision#12773. -->
+<xsd:schema xmlns:ns0="http://bancodebogota.com/WSLdapPPE/service/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://bancodebogota.com/WSLdapPPE/service/v1">
+    <xsd:complexType name="obtenerGruposPortal"/>
+    <xsd:complexType name="getUsuario_2">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionByCodigoResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="rolLite">
+        <xsd:sequence>
+            <xsd:element name="descripcion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="estado" type="xsd:int"/>
+            <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="opciones" type="ns0:opcionLite" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="opcionesLite" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getGruposUsuario">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapById">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByNtResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaAtributos" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="autenticarUsuario">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Clave" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="IdDominio" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionesByTipoResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="atributosLdap">
+        <xsd:sequence>
+            <xsd:element name="SAMAccountName" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="SAMAccountType" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="apellido" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="atributos" type="xsd:anySimpleType" minOccurs="0"/>
+            <xsd:element name="categoriaObjeto" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ciudad" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="claseObjeto" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="codigoPais" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="compania" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="departamento" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="descripcion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="direccion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="direccionesProxy" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="dominio" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="entregaFisicaNombreOficina" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="fechaCreacion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="fechaModificacion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="idGrupoPrimario" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="identificacion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="mail" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="miembroDe" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombreCompleto" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombreDistinguido" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombreVisualizado" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="pais" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="relativo" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="seccion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="telefono" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="titulo" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuarioConOpcionesXCarpetaSegunRol">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="IdOpcionPadre" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerDominios"/>
+    <xsd:complexType name="obtenerOpcionesByTipo">
+        <xsd:sequence>
+            <xsd:element name="TipoOpcion" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaRolesLite">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="roles" type="ns0:rolLite" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="getOpcionesByRolResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesByRol" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByIdDominio">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="dominio" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getOpcionesByRolAndTipoResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesByRol" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getGruposUsuarioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaGruposLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="dominioLite">
+        <xsd:sequence>
+            <xsd:element name="dc" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ldapHost" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuarioConOpcionesXCarpetaSegunRolResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaUsuarioValido" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerRolesPortal"/>
+    <xsd:complexType name="obtenerOpcionesByListaCodigos">
+        <xsd:sequence>
+            <xsd:element name="CodigosOpcion" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuesta" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="codigo" type="xsd:int"/>
+            <xsd:element name="descripcion" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerGruposPortalResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaGruposLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaGruposLite">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="grupos" type="ns0:grupoLite" minOccurs="0" maxOccurs="unbounded"
+                                 nillable="true"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaAtributos">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="atributos" type="ns0:atributosLdap" minOccurs="0" maxOccurs="unbounded"
+                                 nillable="true"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="autenticarUsuarioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaAutenticaUsuario" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByNtDominioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaAtributos" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionesByListaCodigosResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionesByCodigoCarpetaResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByIdResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaAtributos" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerRolesByGrupo">
+        <xsd:sequence>
+            <xsd:element name="idGrupo" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaUsuariosDeGrupo">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="usuarios" type="ns0:usuarioValidoLite" minOccurs="0" maxOccurs="unbounded"
+                                 nillable="true"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByIdDominioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaAtributos" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaOpcionesLite">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="opciones" type="ns0:opcionLite" minOccurs="0" maxOccurs="unbounded"
+                                 nillable="true"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionesPortalResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaOpcionesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerDominiosResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaDominiosLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuariosDeRolResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaUsuariosDeGrupo" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaAutenticaUsuario">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="grupoLite">
+        <xsd:sequence>
+            <xsd:element name="descripcion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="estado" type="xsd:int"/>
+            <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="local" type="xsd:boolean"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="tipo" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getOpcionesByRol">
+        <xsd:sequence>
+            <xsd:element name="IdRol" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaOpcionesByRol">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="opciones" type="ns0:opcionLite" minOccurs="0" maxOccurs="unbounded"
+                                 nillable="true"/>
+                    <xsd:element name="rol" type="ns0:rolLite" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerRolesPortalResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaRolesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByNt">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuariosDeRol">
+        <xsd:sequence>
+            <xsd:element name="NombreRol" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionByCodigo">
+        <xsd:sequence>
+            <xsd:element name="CodigoOpcion" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuariosDeGrupoResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaUsuariosDeGrupo" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuario">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="TipoOpcion" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getEmailUsuarioNt">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="opcionLite">
+        <xsd:sequence>
+            <xsd:element name="codigoApp" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="correoEncargado" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="descripcion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="estado" type="xsd:int"/>
+            <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="opcionPadre" type="ns0:opcionLite" minOccurs="0"/>
+            <xsd:element name="timeout" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="tipo" type="xsd:int"/>
+            <xsd:element name="url" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getGruposLdapUsuarioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaGruposLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="usuarioValidoLite">
+        <xsd:sequence>
+            <xsd:element name="dominio" type="ns0:dominioLite" minOccurs="0"/>
+            <xsd:element name="email" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="estado" type="xsd:int"/>
+            <xsd:element name="estadoPortal" type="xsd:int"/>
+            <xsd:element name="grupos" type="ns0:grupoLite" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="identificacion" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="ip" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="opciones" type="ns0:opcionLite" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="ppe" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="roles" type="ns0:rolLite" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+            <xsd:element name="sid" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerRolesByGrupoResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaRolesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getAtributosLdapByNtDominio">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="dominio" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionesByCodigoCarpeta">
+        <xsd:sequence>
+            <xsd:element name="CodigoOpcion" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getRolesUsuarioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaRolesLite" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getRolesUsuario">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuarioResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaUsuarioValido" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaValor">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="valor" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaUsuarioValido">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="usuario" type="ns0:usuarioValidoLite" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="getOpcionesByRolAndTipo">
+        <xsd:sequence>
+            <xsd:element name="IdRol" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="Tipo" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getGruposLdapUsuario">
+        <xsd:sequence>
+            <xsd:element name="UsuarioNT" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="respuestaDominiosLite">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:respuesta">
+                <xsd:sequence>
+                    <xsd:element name="dominios" type="ns0:dominioLite" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="obtenerOpcionesPortal"/>
+    <xsd:complexType name="getUsuariosDeGrupo">
+        <xsd:sequence>
+            <xsd:element name="NombreGrupo" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getEmailUsuarioNtResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaValor" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getUsuario_2Response">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:respuestaUsuarioValido" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="obtenerGruposPortal" type="ns0:obtenerGruposPortal"/>
+    <xsd:element name="getUsuario_2" type="ns0:getUsuario_2"/>
+    <xsd:element name="obtenerOpcionByCodigoResponse" type="ns0:obtenerOpcionByCodigoResponse"/>
+    <xsd:element name="getGruposUsuario" type="ns0:getGruposUsuario"/>
+    <xsd:element name="getAtributosLdapByIdDominioResponse" type="ns0:getAtributosLdapByIdDominioResponse"/>
+    <xsd:element name="getAtributosLdapById" type="ns0:getAtributosLdapById"/>
+    <xsd:element name="obtenerOpcionesPortalResponse" type="ns0:obtenerOpcionesPortalResponse"/>
+    <xsd:element name="autenticarUsuario" type="ns0:autenticarUsuario"/>
+    <xsd:element name="getAtributosLdapByNtResponse" type="ns0:getAtributosLdapByNtResponse"/>
+    <xsd:element name="obtenerOpcionesByTipoResponse" type="ns0:obtenerOpcionesByTipoResponse"/>
+    <xsd:element name="getUsuariosDeRolResponse" type="ns0:getUsuariosDeRolResponse"/>
+    <xsd:element name="obtenerDominiosResponse" type="ns0:obtenerDominiosResponse"/>
+    <xsd:element name="atributosLdap" type="ns0:atributosLdap"/>
+    <xsd:element name="getUsuarioConOpcionesXCarpetaSegunRol" type="ns0:getUsuarioConOpcionesXCarpetaSegunRol"/>
+    <xsd:element name="obtenerDominios" type="ns0:obtenerDominios"/>
+    <xsd:element name="getOpcionesByRol" type="ns0:getOpcionesByRol"/>
+    <xsd:element name="obtenerRolesPortalResponse" type="ns0:obtenerRolesPortalResponse"/>
+    <xsd:element name="obtenerOpcionesByTipo" type="ns0:obtenerOpcionesByTipo"/>
+    <xsd:element name="getOpcionesByRolResponse" type="ns0:getOpcionesByRolResponse"/>
+    <xsd:element name="getAtributosLdapByNt" type="ns0:getAtributosLdapByNt"/>
+    <xsd:element name="getAtributosLdapByIdDominio" type="ns0:getAtributosLdapByIdDominio"/>
+    <xsd:element name="getUsuariosDeRol" type="ns0:getUsuariosDeRol"/>
+    <xsd:element name="getUsuariosDeGrupoResponse" type="ns0:getUsuariosDeGrupoResponse"/>
+    <xsd:element name="obtenerOpcionByCodigo" type="ns0:obtenerOpcionByCodigo"/>
+    <xsd:element name="getUsuario" type="ns0:getUsuario"/>
+    <xsd:element name="getEmailUsuarioNt" type="ns0:getEmailUsuarioNt"/>
+    <xsd:element name="getOpcionesByRolAndTipoResponse" type="ns0:getOpcionesByRolAndTipoResponse"/>
+    <xsd:element name="getGruposUsuarioResponse" type="ns0:getGruposUsuarioResponse"/>
+    <xsd:element name="getGruposLdapUsuarioResponse" type="ns0:getGruposLdapUsuarioResponse"/>
+    <xsd:element name="dominioLite" type="ns0:dominioLite"/>
+    <xsd:element name="obtenerRolesByGrupoResponse" type="ns0:obtenerRolesByGrupoResponse"/>
+    <xsd:element name="getUsuarioConOpcionesXCarpetaSegunRolResponse"
+                 type="ns0:getUsuarioConOpcionesXCarpetaSegunRolResponse"/>
+    <xsd:element name="getAtributosLdapByNtDominio" type="ns0:getAtributosLdapByNtDominio"/>
+    <xsd:element name="obtenerOpcionesByListaCodigos" type="ns0:obtenerOpcionesByListaCodigos"/>
+    <xsd:element name="getRolesUsuarioResponse" type="ns0:getRolesUsuarioResponse"/>
+    <xsd:element name="obtenerOpcionesByCodigoCarpeta" type="ns0:obtenerOpcionesByCodigoCarpeta"/>
+    <xsd:element name="obtenerRolesPortal" type="ns0:obtenerRolesPortal"/>
+    <xsd:element name="obtenerGruposPortalResponse" type="ns0:obtenerGruposPortalResponse"/>
+    <xsd:element name="getRolesUsuario" type="ns0:getRolesUsuario"/>
+    <xsd:element name="getUsuarioResponse" type="ns0:getUsuarioResponse"/>
+    <xsd:element name="getOpcionesByRolAndTipo" type="ns0:getOpcionesByRolAndTipo"/>
+    <xsd:element name="getGruposLdapUsuario" type="ns0:getGruposLdapUsuario"/>
+    <xsd:element name="respuestaDominiosLite" type="ns0:respuestaDominiosLite"/>
+    <xsd:element name="autenticarUsuarioResponse" type="ns0:autenticarUsuarioResponse"/>
+    <xsd:element name="getAtributosLdapByNtDominioResponse" type="ns0:getAtributosLdapByNtDominioResponse"/>
+    <xsd:element name="obtenerOpcionesByListaCodigosResponse" type="ns0:obtenerOpcionesByListaCodigosResponse"/>
+    <xsd:element name="obtenerOpcionesPortal" type="ns0:obtenerOpcionesPortal"/>
+    <xsd:element name="getAtributosLdapByIdResponse" type="ns0:getAtributosLdapByIdResponse"/>
+    <xsd:element name="obtenerOpcionesByCodigoCarpetaResponse" type="ns0:obtenerOpcionesByCodigoCarpetaResponse"/>
+    <xsd:element name="getUsuariosDeGrupo" type="ns0:getUsuariosDeGrupo"/>
+    <xsd:element name="getEmailUsuarioNtResponse" type="ns0:getEmailUsuarioNtResponse"/>
+    <xsd:element name="getUsuario_2Response" type="ns0:getUsuario_2Response"/>
+    <xsd:element name="obtenerRolesByGrupo" type="ns0:obtenerRolesByGrupo"/>
+</xsd:schema>

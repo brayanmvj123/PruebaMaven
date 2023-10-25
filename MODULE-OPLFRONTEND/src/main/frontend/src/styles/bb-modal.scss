@@ -1,0 +1,133 @@
+@import "theming";
+
+.bb-modal {
+  font-size: 1.25em;
+  color: #595959;
+  overflow: hidden !important;
+
+  h2 {
+    font-size: 1.7em;
+    color: #595959;
+  }
+
+  p {
+    font-size: 1.125em;
+  }
+
+  .bb-modal-icon {
+    height: 90px;
+
+    &.bb-modal-loading {
+      height: 0;
+      overflow: hidden;
+    }
+
+    .bb-icon-canvas {
+      display: flex;
+      font-family: inherit;
+      line-height: 5em;
+      cursor: default;
+      position: relative;
+      box-sizing: content-box;
+      justify-content: center;
+      width: 5em;
+      height: 5em;
+      margin: 1.25em auto 1.875em;
+      border: .25em solid transparent;
+      border-radius: 50%;
+      user-select: none;
+
+      &.question {
+        border-color: #c9dae1;
+        color: #87adbd;
+      }
+
+      .bb-icon-text {
+        display: flex;
+        align-items: center;
+        font-size: 3.75em;
+      }
+    }
+  }
+
+  .bb-control {
+    button {
+      padding: 2px 25px;
+    }
+  }
+
+  .loading-list {
+
+    .loading-item {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: .3rem;
+      align-items: center;
+
+      .loading-check {
+        width: 30px;
+
+        .item-loading {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          color: rgba($bdb-orange-light, .8);
+
+          .uk-spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .ng-fa-icon {
+            position: absolute;
+            font-size: 12px;
+          }
+        }
+
+        .item-waiting {
+          font-size: 18px;
+        }
+
+        .item-success {
+          font-size: 18px;
+          color: rgba($success-color, .8);
+        }
+
+        .item-danger {
+          font-size: 18px;
+          color: rgba($danger-color, .8);
+        }
+      }
+
+      .loading-name {
+        transition: all 300ms;
+
+        &.msg-success {
+          color: rgba($success-color, .8);
+        }
+
+        &.msg-danger {
+          color: rgba($danger-color, .8);
+        }
+
+        &.msg-waiting {
+          color: rgba($bdb-orange-light, .8);
+        }
+      }
+    }
+  }
+}
+
+.bb-modal-2 {
+  .mat-expansion-panel-header-title {
+    color: $bdb-color;
+    font-weight: bold;
+    width: 40%;
+  }
+  .mat-expansion-panel {
+    &:not([class*=mat-elevation-z]) {
+      box-shadow: none;
+    }
+  }
+}

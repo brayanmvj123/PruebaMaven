@@ -1,0 +1,120 @@
+<section class="users uk-animation-slide-bottom-medium">
+
+    <!-- title heading -->
+    <div class="breadcrumb">
+        <h1>Liquidación Semanal</h1>
+        <div>Panel de administración de liquidación de CDTs</div>
+    </div>
+    <div class="breadcrumb-separator"></div>
+    <!-- end title heading -->
+
+    <div class="card uk-animation-slide-bottom-medium" *ngIf="dataSource.length === 0">
+        <div class="card-body">
+            <h3>No existen CDTs para liquidar...</h3>
+        </div>
+    </div>
+
+    <div class="card uk-animation-slide-bottom-medium" *ngIf="blockConcili">
+        <div class="card-body">
+            La conciliación fue cerrada exitósamente.
+        </div>
+    </div>
+
+    <div [hidden]="determ!=true">
+
+        <div class="card uk-animation-slide-bottom-medium">
+            <div class="card-body">
+                <div class="controls uk-margin-small-bottom">
+
+                    <!-- Filtrar-->
+                    <div class="search">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="report">
+                        <button class="uk-button uk-button-small uk-button-success rb" (click)="openPasswordDialog()">
+                        <span class="irb">
+                            <fa-icon [icon]="['fas', 'file-excel']"></fa-icon>
+                        </span>
+                        <span>Exportar</span>
+                    </button>
+                        <a class="download-zip-link" #downloadXlsxLink></a>
+                    </div>
+                </div>
+
+                <div class="controls uk-margin-small-bottom">
+                    <div class="num-per-page">
+                        <div [(ngModel)]="uPerPage" (change)="changeIPP()" [disabled]="dataSourcePag.length < 5">
+                        </div>
+                    </div>
+                    <div class="report"></div>
+                </div>
+
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSourcePag" multiTemplateDataRows *ngIf="!loading && dataSource.length > 0" class="dbd-dt-elevation uk-animation-slide-bottom-medium">
+
+                        <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+                            <th mat-header-cell *matHeaderCellDef [innerText]="setColumnName(column)"></th>
+                            <td mat-cell *matCellDef="let element">
+
+                                <div [ngSwitch]="column" (click)="openAlertDialog(element)" class="textSizeBody">
+                                    <div *ngSwitchDefault [innerText]="element[column]"></div>
+                                    <div *ngSwitchCase="'valConciliacion'" class="status_item" [ngStyle]="{'background-color': validateStatus(element[column])}" [innerText]="validateStatus(element[column], 'name')"></div>
+                                </div>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expandedDetail">
+                            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                                <div class="bdb-dt-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="bdb-dt-element-row" [class.bdb-dt-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="bdb-dt-detail-row"></tr>
+                    </table>
+                    <div class="container center-h center-v">
+                        <mat-paginator [pageSize]=5 [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+                    </div>
+                </div>
+
+                <!-- Cerrar conciliacion -->
+                <div class="botton-external">
+                    <button class="uk-button uk-button-primary" (click)="confirmSend()" [disabled]="!enableSentConci" [hidden]="blockConcili">
+                        <span>Cerrar conciliación</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="uk-flex-top bb-modal-password-main" id="password-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-animation-slide-bottom-medium bb-modal-password uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h4>Contraseña para archivo de Excel</h4>
+        <div class="password-input">
+            <div class="input-merged">
+                <input type="{{eyeOpened ? 'text' : 'password'}}" class="uk-input" [(ngModel)]="filePassword" placeholder="Contraseña" title="Contraseña">
+                <button type="button" class="right" (mousedown)="eye()" (mouseup)="eye()">
+                    <fa-icon [icon]="['fas', eyeOpened ? 'eye' : 'eye-slash']"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <div class="password-button uk-margin-small-top uk-text-center">
+            <button class="uk-button uk-button-success" [disabled]="filePassword === ''" (click)="downloadExcel()">
+                <span *ngIf="tableLoading">
+                    <div uk-spinner="ratio: .9"></div>
+                </span>
+                <span *ngIf="!tableLoading">
+                    <fa-icon [icon]="['fas', 'download']"></fa-icon>
+                    Descargar archivo Excel
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

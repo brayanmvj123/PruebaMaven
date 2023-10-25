@@ -1,0 +1,65 @@
+<h4 mat-dialog-title>¿Necesitas ayuda para ingresar a la platafoma?</h4>
+<mat-dialog-content class="mat-typography uk-padding-small bb-modal-2">
+    <div class="uk-animation-fade bb-m-sh" [class.sho]="showAccordeon" *ngIf="showAccordeon">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> ¿Es la primera vez que vas a ingresar?
+                    </mat-panel-title>
+                    <mat-panel-description> Intrucciones para ingresar por primera vez
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>Ingreso por primera vez y no está habilitado en el Grupo de Directorio Activo para ingresar a la
+                    plataforma.</p>
+                <ol>
+                    <li> Debes solicitar por correo a Flujo de Excepción (<a
+                            href="mailto:FLUJOEXCEP@bancodebogota.com.co">FLUJOEXCEP@bancodebogota.com.co</a>)
+                        los siguientes puntos:
+                        <ul>
+                            <li> Solicitar a Gestión de Identidad crear el nuevo usuario en el Grupo de Directorio
+                                Activo (Se debe
+                                aclarar Nombre Grupo de Directorio Activo y nombre de usuario de red).
+                            </li>
+                            <li> Solicitar incluir Cargo Planta en el Grupo de Directorio Activo y permisos que
+                                corresponda en la Matriz
+                                de Roles y Perfiles.
+                            </li>
+                        </ul>
+                    </li>
+                    <li> Debes actualizar la Matriz de Acceso Lógico y solicitar por CVU incluir Usuario de Red en el
+                        Grupo de
+                        Directorio Activo.
+                    </li>
+                </ol>
+            </mat-expansion-panel>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> ¿No has usado la plataforma en mucho tiempo y necesitas activar tu usuario?
+                    </mat-panel-title>
+                    <mat-panel-description> Instrucciones para recuperar el acceso.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p> Debes enviar un correo a Flujo de Excepción (<a
+                        href="mailto:FLUJOEXCEP@bancodebogota.com.co">FLUJOEXCEP@bancodebogota.com.co</a>)
+                    para que Gestión de Identidad active tus permisos de usuario de red en el Grupo de Directorio
+                    Activo.
+                </p>
+            </mat-expansion-panel>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> ¿Estuviste de vacaciones o licencia y necesitas activar tu usuario?
+                    </mat-panel-title>
+                    <mat-panel-description> Instrucciones para recuperar el acceso.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p> Debes enviar un correo a Flujo de Excepción (<a
+                        href="mailto:FLUJOEXCEP@bancodebogota.com.co">FLUJOEXCEP@bancodebogota.com.co</a>)
+                    para que Gestión de Identidad active tus permisos de usuario de red en el Grupo de Directorio
+                    Activo.
+                </p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end"> <button mat-button mat-dialog-close color="primary" cdkFocusInitial>Cerrar</button>
+</mat-dialog-actions>

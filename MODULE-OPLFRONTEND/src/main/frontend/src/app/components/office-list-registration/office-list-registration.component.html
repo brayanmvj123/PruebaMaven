@@ -1,0 +1,145 @@
+<section class="home uk-animation-slide-bottom-medium uk-animation-fast">
+
+    <!-- title -->
+    <div class="breadcrumb">
+        <h1>Registro de usuarios</h1>
+        <div>Registro de nuevos usuarios</div>
+    </div>
+    <div class="breadcrumb-separator"></div>
+    <!-- end title -->
+
+    <div class="card">
+        <div class="card-body">
+            <form [ngClass]="{}" [formGroup]="officeListReg" class="office" method="post" (ngSubmit)="confirmSave()" novalidate>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Oficina -->
+                    <div class="group bb-grid-h">
+                        <label for="val_oficina">Oficina:</label>
+                        <div>
+                            <input type="number" class="uk-input uk-text-center" id="val_oficina" name="val_oficina" formControlName="val_oficina" autocomplete="off" required>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Oficina -->
+                    <!-- Subsegmento -->
+                    <div class="group bb-grid-h">
+                        <label for="val_subsegmento">Subsegmento:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="val_subsegmento" name="val_subsegmento" formControlName="val_subsegmento" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End Subsegmento -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Zona -->
+                    <div class="group bb-grid-h">
+                        <label for="val_zona">Zona:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="val_zona" name="val_zona" formControlName="val_zona" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End Zona -->
+                    <!-- Cargo -->
+                    <div class="group bb-grid-h">
+                        <label for="val_cargo">Cargo:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="val_cargo" name="val_cargo" formControlName="val_cargo" autocomplete="off" required>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Cargo -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Nombre -->
+                    <div class="group bb-grid-h">
+                        <label for="val_nombre">Nombre:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="val_nombre" name="val_nombre" formControlName="val_nombre" autocomplete="off" required>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Nombre -->
+                    <!-- Correo -->
+                    <div class="group bb-grid-h">
+                        <label for="val_correo">Usuario de red:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="val_correo" name="val_correo" formControlName="val_correo" autocomplete="off" required>
+                            <div class="s-message error required">Este campo es requerido.</div>
+                        </div>
+                    </div>
+                    <!-- End Correo -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- celular -->
+                    <div class="group bb-grid-h">
+                        <label for="val_celular">Número celular:</label>
+                        <div>
+                            <input type="number" class="uk-input uk-text-center" id="val_celular" name="val_celular" formControlName="val_celular" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End celular -->
+                    <!-- Conmutador -->
+                    <div class="group bb-grid-h">
+                        <label for="val_conmutador">Conmutador:</label>
+                        <div>
+                            <input type="number" class="uk-input uk-text-center" id="val_conmutador" name="val_conmutador" formControlName="val_conmutador" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End Conmutador -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Extensión -->
+                    <div class="group bb-grid-h">
+                        <label for="val_ext">Extensión:</label>
+                        <div>
+                            <input type="number" class="uk-input uk-text-center" id="val_ext" name="val_ext" formControlName="val_ext" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End Extensión -->
+                    <!-- Ciudad -->
+                    <div class="group bb-grid-h">
+                        <label for="val_ciudad">Ciudad:</label>
+                        <div>
+                            <input type="text" class="uk-input uk-text-center" id="val_ciudad" name="val_ciudad" formControlName="val_ciudad" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End Ciudad -->
+                </div>
+
+                <div class="uk-child-width-expand@s uk-margin-remove-top" uk-grid>
+                    <!-- Csc -->
+                    <div class="group bb-grid-h">
+                        <label for="val_csc">Csc:</label>
+                        <div>
+                            <input type="number" class="uk-input uk-text-center" id="val_csc" name="val_csc" formControlName="val_csc" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- End Csc -->
+                </div>
+
+                <div class="uk-margin-medium-top uk-flex">
+                    <div class="flex-grow">
+                        <button type="button" mat-raised-button color="warn" (click)="processReturn()">
+                            <fa-icon [icon]="['fas', 'undo-alt']"></fa-icon>
+                            Volver
+                        </button>
+                    </div>
+
+                    <div class="flex-grow uk-text-right">
+                        <button type="submit" mat-raised-button color="primary" [disabled]="!this.officeListReg.valid">
+                            Registrar
+                            <fa-icon [icon]="['fas', 'chevron-circle-right']"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</section>

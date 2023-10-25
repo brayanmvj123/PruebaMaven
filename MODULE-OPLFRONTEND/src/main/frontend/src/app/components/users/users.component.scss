@@ -1,0 +1,40 @@
+@import "src/theming";
+
+.bb-users {
+  margin: 0;
+}
+
+// User icon in result search
+.user-icon {
+  width: 30px;
+  height: 30px;
+  background-color: $a-sub-bg-aside;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reposition {
+  margin-top: 1rem;
+}
+
+// Excel Password modal
+.bb-modal-password {
+  width: 400px;
+  border-radius: 5px;
+
+  h4 {
+    font-size: 18px;
+    font-style: italic;
+  }
+}
+
+.popuptext {
+  border: 0;
+  background-color: white;
+  size: 10;
+  width: 250px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+}

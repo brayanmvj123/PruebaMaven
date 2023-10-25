@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    description: @project.description@
+
+translator:
+  source_application: DECE
+  transaction_code: APDI
+  transaction_code_cadi: CADI
+
+server:
+  port: 8082
