@@ -2,7 +2,7 @@ name: Build With Maven
 run-name: Build With Maven
 on:
   push:
-    branches: [ feature/brayan ]
+    branches: [ main ]
 
 jobs:
   build:
