@@ -27,3 +27,7 @@ Este comando compilará todos los módulos y generará un archivo war de cada un
 
 **NOTA:** Si se tiene problemas para ejecutar el comando `mvn clean install`, se puede ingresar a la ruta de cada
 módulo y ejecutar el comando `mvn compile war:war`.
+
+
+
+
