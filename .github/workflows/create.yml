@@ -1,0 +1,170 @@
+name: Versionamiento Semántico - Create Version Tag
+run-name: Versionamiento Semántico - Create Version Tag
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+      - staging
+      - qa
+      - release
+      - feature/bv2
+
+jobs:
+  create_tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🕒 Configurar entorno y zona horaria
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          sudo timedatectl set-timezone America/Bogota
+
+      - name: 🧩 Checkout del commit mergeado
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+
+      - name: 🔍 Verificar información del PR
+        run: |
+          echo "Rama base (destino): ${{ github.event.pull_request.base.ref }}"
+          echo "Rama origen: ${{ github.event.pull_request.head.ref }}"
+          echo "SHA del merge: ${{ github.event.pull_request.merge_commit_sha }}"
+          echo "Rama actual en checkout: $(git branch --show-current || echo '(detached HEAD)')"
+
+      - name: 🏷️ Obtener última versión según la rama
+        id: latest_version
+        run: |
+          current_branch="${{ github.event.pull_request.base.ref }}"
+          echo "Rama actual: $current_branch"
+          
+          # Determinar prefijo según la rama destino
+          case "$current_branch" in
+            "master"|"main") tag_prefix="v" ;;
+            "staging") tag_prefix="staging-v" ;;
+            "qa") tag_prefix="qa-v" ;;
+            "feature/bv2") tag_prefix="release-v" ;;
+            *)
+              echo "❌ Error: Rama no válida para versionamiento ($current_branch)"
+              exit 1
+              ;;
+          esac
+
+          echo "Prefijo de tag: $tag_prefix"
+          echo "Buscando tags con prefijo '${tag_prefix}'..."
+
+          # Buscar tags existentes con ese prefijo
+          all_tags=$(git tag -l "${tag_prefix}[0-9]*.[0-9]*.[0-9]*" | grep -E "^${tag_prefix}[0-9]+\.[0-9]+\.[0-9]+$" | sort -V)
+
+          if [ -z "$all_tags" ]; then
+            echo "⚠️ No hay tags previos, usando versión inicial ${tag_prefix}1.0.0"
+            latest_version="${tag_prefix}1.0.0"
+            is_first_tag=true
+          else
+            echo "Tags encontrados:"
+            echo "$all_tags"
+            latest_version=$(echo "$all_tags" | tail -n1)
+            is_first_tag=false
+          fi
+
+          echo "➡️ Último tag encontrado: $latest_version"
+          echo "latest_version=$latest_version" >> $GITHUB_OUTPUT
+          echo "is_first_tag=$is_first_tag" >> $GITHUB_OUTPUT
+          echo "tag_prefix=$tag_prefix" >> $GITHUB_OUTPUT
+
+      - name: ⚙️ Determinar siguiente versión
+        id: determine_version
+        run: |
+          tag_prefix="${{ steps.latest_version.outputs.tag_prefix }}"
+          latest_version="${{ steps.latest_version.outputs.latest_version }}"
+          is_first_tag="${{ steps.latest_version.outputs.is_first_tag }}"
+
+          echo "Última versión: $latest_version"
+          echo "¿Primer tag?: $is_first_tag"
+
+          # Extraer los números de versión considerando el prefijo dinámico
+          version_pattern="^${tag_prefix}([0-9]+)\.([0-9]+)\.([0-9]+)$"
+
+          if [[ "$latest_version" =~ $version_pattern ]]; then
+            major="${BASH_REMATCH[1]}"
+            minor="${BASH_REMATCH[2]}"
+            patch="${BASH_REMATCH[3]}"
+            echo "Versión base -> Major: $major | Minor: $minor | Patch: $patch"
+          else
+            echo "Error: El formato del último tag no coincide con el prefijo esperado ($tag_prefix)"
+            exit 1
+          fi
+
+          # Determinar tipo de incremento
+          pr_title=$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)
+          labels=$(jq -r '.pull_request.labels[].name' $GITHUB_EVENT_PATH)
+          echo "Título PR: $pr_title"
+          echo "Labels PR: $labels"
+
+          pr_title_lower=$(echo "$pr_title" | tr '[:upper:]' '[:lower:]')
+          semantic_label=""
+
+          for label in $labels; do
+            label_lower=$(echo "$label" | tr '[:upper:]' '[:lower:]')
+            case "$label_lower" in
+              "major"|"minor"|"patch") semantic_label="$label_lower"; break ;;
+            esac
+          done
+
+          if [ -n "$semantic_label" ]; then
+            version_type="$semantic_label"
+            echo "✅ Tipo de versión (por label): $version_type"
+          elif [[ "$pr_title_lower" =~ ^op- ]] || [[ "$pr_title_lower" =~ ^fx- ]]; then
+            version_type="patch"
+            echo "🔧 Detectado prefijo op-/fx- en título (patch)"
+          elif [[ "$pr_title_lower" =~ ^rs- ]]; then
+            version_type="minor"
+            echo "📦 Detectado prefijo rs- en título (minor)"
+          else
+            echo "❌ No se encontró label ni prefijo válido"
+            exit 1
+          fi
+
+          # Calcular siguiente versión
+          case "$version_type" in
+            "patch") patch=$((patch + 1));;
+            "minor") minor=$((minor + 1)); patch=0;;
+            "major") major=$((major + 1)); minor=0; patch=0;;
+          esac
+
+          next_version="v${major}.${minor}.${patch}"
+          full_tag="${tag_prefix}${next_version}"
+
+          echo "next_version=$next_version" >> $GITHUB_OUTPUT
+          echo "full_tag=$full_tag" >> $GITHUB_OUTPUT
+
+          echo "🏁 Nueva versión calculada: $full_tag"
+
+      - name: 🪣 Crear tag Git real y subirlo al repo
+        run: |
+          full_tag="${{ steps.determine_version.outputs.full_tag }}"
+          echo "Creando tag local: $full_tag"
+          git tag -a "$full_tag" -m "Tag generado automáticamente para ${{ github.event.pull_request.base.ref }}"
+          echo "Subiendo tag a origin..."
+          git push origin "$full_tag"
+          echo "✅ Tag Git creado y subido correctamente"
+
+      - name: 🚀 Crear release en GitHub
+        run: |
+          echo "Creando release con tag: ${{ steps.determine_version.outputs.full_tag }}"
+
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases" \
+            -d "{
+              \"tag_name\": \"${{ steps.determine_version.outputs.full_tag }}\",
+              \"name\": \"Release ${{ steps.determine_version.outputs.full_tag }}\",
+              \"body\": \"Release generado automáticamente desde la rama ${{ github.event.pull_request.base.ref }}\",
+              \"draft\": false,
+              \"prerelease\": false
+            }"
